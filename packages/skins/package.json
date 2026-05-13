@@ -1,0 +1,40 @@
+{
+  "name": "@heeh-ui/skins",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./office": {
+      "types": "./dist/office/index.d.ts",
+      "import": "./dist/office/index.js"
+    },
+    "./cartoon": {
+      "types": "./dist/cartoon/index.d.ts",
+      "import": "./dist/cartoon/index.js"
+    },
+    "./minimal": {
+      "types": "./dist/minimal/index.d.ts",
+      "import": "./dist/minimal/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@heeh-ui/styles": "workspace:*",
+    "@heeh-ui/theme": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3"
+  }
+}
