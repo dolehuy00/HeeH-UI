@@ -21,6 +21,9 @@
   "dependencies": {
     "@heeh-ui/components": "workspace:*",
     "@heeh-ui/core": "workspace:*",
+    "@heeh-ui/data-display": "workspace:*",
+    "@heeh-ui/forms": "workspace:*",
+    "@heeh-ui/utils": "workspace:*",
     "react": "^19.2.6"
   },
   "devDependencies": {
