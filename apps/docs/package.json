@@ -1,0 +1,31 @@
+{
+  "name": "@heeh-ui/docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "tsc -p tsconfig.json --noEmit",
+    "clean": "rimraf storybook-static"
+  },
+  "dependencies": {
+    "@heeh-ui/components": "workspace:*",
+    "@heeh-ui/core": "workspace:*",
+    "@heeh-ui/styles": "workspace:*",
+    "@heeh-ui/tokens": "workspace:*",
+    "@heeh-ui/theme": "workspace:*",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "8.6.18",
+    "@storybook/react": "8.6.18",
+    "@storybook/react-vite": "8.6.18",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "storybook": "8.6.18",
+    "typescript": "^5.7.2"
+  }
+}
