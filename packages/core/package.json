@@ -22,11 +22,11 @@
     "@heeh-ui/hooks": "workspace:*",
     "@heeh-ui/utils": "workspace:*",
     "class-variance-authority": "^0.7.1",
-    "react": "^18.3.1"
+    "react": "^19.2.6"
   },
   "devDependencies": {
-    "@types/react": "^18.3.18",
-    "typescript": "^5.7.2"
+    "@types/react": "^19.2.14",
+    "typescript": "^6.0.3"
   },
   "peerDependencies": {
     "react": ">=18"

@@ -14,18 +14,17 @@
     "@heeh-ui/components": "workspace:*",
     "@heeh-ui/core": "workspace:*",
     "@heeh-ui/styles": "workspace:*",
-    "@heeh-ui/tokens": "workspace:*",
     "@heeh-ui/theme": "workspace:*",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@heeh-ui/tokens": "workspace:*",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "8.6.18",
-    "@storybook/react": "8.6.18",
-    "@storybook/react-vite": "8.6.18",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "storybook": "8.6.18",
-    "typescript": "^5.7.2"
+    "@storybook/react": "10.3.6",
+    "@storybook/react-vite": "10.3.6",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "storybook": "10.3.6",
+    "typescript": "^6.0.3"
   }
 }

@@ -21,11 +21,11 @@
   "dependencies": {
     "@heeh-ui/core": "workspace:*",
     "@heeh-ui/utils": "workspace:*",
-    "react": "^18.3.1"
+    "react": "^19.2.6"
   },
   "devDependencies": {
-    "@types/react": "^18.3.18",
-    "typescript": "^5.7.2"
+    "@types/react": "^19.2.14",
+    "typescript": "^6.0.3"
   },
   "peerDependencies": {
     "react": ">=18"

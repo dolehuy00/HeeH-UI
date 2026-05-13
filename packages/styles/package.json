@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "sideEffects": ["src/*.css"],
+  "sideEffects": [
+    "src/*.css"
+  ],
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -12,7 +14,10 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
-    "./css": "./src/index.css"
+    "./css": {
+      "types": "./src/css.d.ts",
+      "default": "./src/index.css"
+    }
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -21,6 +26,6 @@
     "clean": "rimraf dist"
   },
   "devDependencies": {
-    "typescript": "^5.7.2"
+    "typescript": "^6.0.3"
   }
 }
