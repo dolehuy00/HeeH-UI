@@ -13,6 +13,10 @@
   "dependencies": {
     "@heeh-ui/components": "workspace:*",
     "@heeh-ui/core": "workspace:*",
+    "@heeh-ui/data-display": "workspace:*",
+    "@heeh-ui/forms": "workspace:*",
+    "@heeh-ui/patterns": "workspace:*",
+    "@heeh-ui/skins": "workspace:*",
     "@heeh-ui/styles": "workspace:*",
     "@heeh-ui/theme": "workspace:*",
     "@heeh-ui/tokens": "workspace:*",
