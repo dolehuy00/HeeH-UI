@@ -1,41 +1,27 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@heeh-ui/utils";
+import type { ButtonSkinProps } from "@heeh-ui/theme";
+import { useSkin } from "@heeh-ui/theme";
 
-export const buttonVariants = cva(
-  "heeh-button",
-  {
-    variants: {
-      variant: {
-        solid: "heeh-button--solid",
-        outline: "heeh-button--outline",
-        ghost: "heeh-button--ghost"
-      },
-      size: {
-        sm: "heeh-button--sm",
-        md: "heeh-button--md",
-        lg: "heeh-button--lg"
-      }
-    },
-    defaultVariants: {
-      variant: "solid",
-      size: "md"
-    }
-  }
-);
-
-export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
-  VariantProps<typeof buttonVariants>;
+export type ButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className"> &
+  ButtonSkinProps;
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, type = "button", ...props }, ref) => {
+  ({ className, variant, size, type = "button", disabled, loading, children, ...props }, ref) => {
+    const skin = useSkin();
+    const isDisabled = disabled || loading;
+
     return (
       <button
         ref={ref}
         type={type}
-        className={cn(buttonVariants({ variant, size }), className)}
+        className={skin.button({ variant, size, disabled, loading, className })}
+        disabled={isDisabled}
+        aria-busy={loading || undefined}
         {...props}
-      />
+      >
+        {loading ? <span className="heeh-button__spinner" aria-hidden="true" /> : null}
+        {children}
+      </button>
     );
   }
 );
