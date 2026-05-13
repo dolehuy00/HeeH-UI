@@ -25,6 +25,9 @@
     "lint": "tsc -p tsconfig.json --noEmit",
     "clean": "rimraf dist"
   },
+  "dependencies": {
+    "@heeh-ui/utils": "workspace:*"
+  },
   "devDependencies": {
     "typescript": "^6.0.3"
   }
