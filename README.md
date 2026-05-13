@@ -24,6 +24,58 @@ packages/
   charts/               # Chart wrappers
 ```
 
+## Getting Started
+
+Install dependencies from the repository root:
+
+```bash
+pnpm install
+```
+
+On Windows PowerShell, if `pnpm` is blocked by the script execution policy, use `pnpm.cmd` instead:
+
+```bash
+pnpm.cmd install
+```
+
+## Run Apps
+
+Run the Storybook documentation app:
+
+```bash
+pnpm --filter @heeh-ui/docs dev
+```
+
+Storybook starts at `http://localhost:6006`. If that port is already in use, Storybook will offer another port.
+
+Run the local playground app:
+
+```bash
+pnpm --filter @heeh-ui/playground dev
+```
+
+Vite starts at `http://localhost:5173` by default.
+
+Run every dev task in the workspace:
+
+```bash
+pnpm dev
+```
+
+## Verify
+
+Typecheck all packages:
+
+```bash
+pnpm typecheck
+```
+
+Build all packages and apps:
+
+```bash
+pnpm build
+```
+
 ## Dependency Direction
 
 Packages should depend downward only:
@@ -52,7 +104,7 @@ Large reusable components should support:
 
 ## Recommended Stack
 
-- React 18
+- React 19
 - TypeScript
 - pnpm workspace
 - Turborepo
