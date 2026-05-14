@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  background: hsl(var(--heeh-color-background));
+  background: var(--heeh-background-body);
   color: hsl(var(--heeh-color-foreground));
   font-family: var(--heeh-font-sans);
 }
@@ -173,7 +173,7 @@ body {
 }
 
 .heeh-text--danger {
-  color: hsl(0 72% 51%);
+  color: hsl(var(--heeh-color-danger));
 }
 
 .heeh-heading {
@@ -237,6 +237,7 @@ body {
 .heeh-link {
   color: hsl(var(--heeh-color-primary));
   text-decoration: none;
+  transition: color var(--heeh-motion-duration-fast) var(--heeh-motion-ease-standard);
 }
 
 .heeh-link:hover {
@@ -264,17 +265,17 @@ body {
 }
 
 .heeh-surface--default {
-  background: hsl(var(--heeh-color-background));
+  background: var(--heeh-background-surface);
 }
 
 .heeh-surface--muted {
-  background: hsl(var(--heeh-color-muted));
+  background: var(--heeh-background-muted);
 }
 
 .heeh-surface--elevated {
   border-color: hsl(var(--heeh-color-border));
-  background: hsl(var(--heeh-color-background));
-  box-shadow: 0 12px 32px rgb(15 23 42 / 10%);
+  background: var(--heeh-gradient-surface);
+  box-shadow: var(--heeh-shadow-md);
 }
 
 .heeh-section {
@@ -307,12 +308,12 @@ body {
 }
 
 .heeh-section--muted {
-  background: hsl(var(--heeh-color-muted));
+  background: var(--heeh-background-muted);
   color: hsl(var(--heeh-color-foreground));
 }
 
 .heeh-section--accent {
-  background: hsl(var(--heeh-color-primary));
+  background: var(--heeh-gradient-accent);
   color: hsl(var(--heeh-color-primary-foreground));
 }
 
@@ -327,7 +328,7 @@ body {
   cursor: pointer;
   text-decoration: none;
   white-space: nowrap;
-  transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease, color 120ms ease, opacity 120ms ease, transform 120ms ease;
+  transition: background-color var(--heeh-motion-duration-fast) var(--heeh-motion-ease-standard), border-color var(--heeh-motion-duration-fast) var(--heeh-motion-ease-standard), box-shadow var(--heeh-motion-duration-fast) var(--heeh-motion-ease-standard), color var(--heeh-motion-duration-fast) var(--heeh-motion-ease-standard), opacity var(--heeh-motion-duration-fast) var(--heeh-motion-ease-standard), transform var(--heeh-motion-duration-fast) var(--heeh-motion-ease-standard);
 }
 
 .heeh-button:disabled,
@@ -342,8 +343,8 @@ body {
   height: 1em;
   border: 2px solid currentColor;
   border-right-color: transparent;
-  border-radius: 999px;
-  animation: heeh-spin 720ms linear infinite;
+  border-radius: var(--heeh-radius-pill);
+  animation: heeh-spin var(--heeh-motion-duration-spin) linear infinite;
 }
 
 @keyframes heeh-spin {
@@ -372,7 +373,7 @@ body {
 
 .heeh-skin-office-button {
   border-radius: var(--heeh-radius-md);
-  box-shadow: 0 1px 2px rgb(15 23 42 / 10%);
+  box-shadow: var(--heeh-shadow-sm);
 }
 
 .heeh-skin-office-button--primary {
@@ -390,8 +391,8 @@ body {
 }
 
 .heeh-skin-office-button--danger {
-  background: hsl(0 72% 51%);
-  color: white;
+  background: hsl(var(--heeh-color-danger));
+  color: hsl(var(--heeh-color-danger-foreground));
 }
 
 .heeh-skin-office-button--outline {
@@ -412,8 +413,8 @@ body {
 
 .heeh-skin-cartoon-button {
   border: 3px solid currentColor;
-  border-radius: 1rem;
-  box-shadow: 4px 4px 0 currentColor;
+  border-radius: var(--heeh-radius-2xl);
+  box-shadow: var(--heeh-shadow-cartoon);
   font-weight: 800;
   letter-spacing: 0;
 }
@@ -434,12 +435,12 @@ body {
 }
 
 .heeh-skin-cartoon-button--danger {
-  background: hsl(0 91% 71%);
+  background: hsl(var(--heeh-color-danger));
   color: hsl(224 71% 4%);
 }
 
 .heeh-skin-cartoon-button--ghost {
-  background: white;
+  background: var(--heeh-background-surface);
   color: hsl(224 71% 4%);
 }
 
@@ -468,7 +469,7 @@ body {
 }
 
 .heeh-skin-minimal-button--danger {
-  color: hsl(0 72% 51%);
+  color: hsl(var(--heeh-color-danger));
 }
 
 .heeh-skin-minimal-button--ghost {
@@ -490,15 +491,15 @@ body {
 }
 
 .heeh-skin-office-input {
-  box-shadow: 0 1px 2px rgb(15 23 42 / 6%);
+  box-shadow: var(--heeh-shadow-xs);
 }
 
 .heeh-skin-office-card--elevated {
-  box-shadow: 0 16px 40px rgb(15 23 42 / 12%);
+  box-shadow: var(--heeh-shadow-lg);
 }
 
 .heeh-skin-office-section--accent {
-  background: hsl(var(--heeh-color-primary));
+  background: var(--heeh-gradient-accent);
   color: hsl(var(--heeh-color-primary-foreground));
 }
 
@@ -506,12 +507,12 @@ body {
 .heeh-skin-cartoon-card,
 .heeh-skin-cartoon-input {
   border: 3px solid currentColor;
-  border-radius: 1rem;
+  border-radius: var(--heeh-radius-2xl);
 }
 
 .heeh-skin-cartoon-card,
 .heeh-skin-cartoon-surface--elevated {
-  box-shadow: 6px 6px 0 currentColor;
+  box-shadow: var(--heeh-shadow-cartoon);
 }
 
 .heeh-skin-cartoon-heading {
@@ -523,7 +524,7 @@ body {
 }
 
 .heeh-skin-cartoon-section--accent {
-  background: hsl(48 96% 62%);
+  background: var(--heeh-gradient-hero);
   color: hsl(224 71% 4%);
 }
 
@@ -553,18 +554,18 @@ body {
 
 .heeh-skin-minimal-section--accent {
   border-block: 1px solid hsl(var(--heeh-color-border));
-  background: transparent;
+  background: var(--heeh-background-surface);
   color: hsl(var(--heeh-color-foreground));
 }
 
 .heeh-card {
   border: 1px solid hsl(var(--heeh-color-border));
   border-radius: var(--heeh-radius-lg);
-  background: hsl(var(--heeh-color-background));
+  background: var(--heeh-background-surface);
 }
 
 .heeh-card--elevated {
-  box-shadow: 0 16px 40px rgb(15 23 42 / 12%);
+  box-shadow: var(--heeh-shadow-lg);
 }
 
 .heeh-card--outline {
@@ -573,12 +574,12 @@ body {
 
 .heeh-card.heeh-skin-cartoon-card {
   border: 3px solid currentColor;
-  border-radius: 1rem;
+  border-radius: var(--heeh-radius-2xl);
 }
 
 .heeh-card.heeh-skin-cartoon-card,
 .heeh-card.heeh-skin-cartoon-card--elevated {
-  box-shadow: 6px 6px 0 currentColor;
+  box-shadow: var(--heeh-shadow-cartoon);
 }
 
 .heeh-card.heeh-skin-minimal-card {
@@ -640,7 +641,7 @@ body {
 }
 
 .heeh-form-message--danger {
-  color: hsl(0 72% 51%);
+  color: hsl(var(--heeh-color-danger));
 }
 
 .heeh-form-message--default {
@@ -680,11 +681,11 @@ body {
   width: 100%;
   border: 1px solid hsl(var(--heeh-color-border));
   border-radius: var(--heeh-radius-md);
-  background: hsl(var(--heeh-color-background));
+  background: var(--heeh-background-surface);
   color: hsl(var(--heeh-color-foreground));
   font: inherit;
   font-size: var(--heeh-text-md);
-  transition: border-color 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+  transition: border-color var(--heeh-motion-duration-fast) var(--heeh-motion-ease-standard), box-shadow var(--heeh-motion-duration-fast) var(--heeh-motion-ease-standard), opacity var(--heeh-motion-duration-fast) var(--heeh-motion-ease-standard);
 }
 
 .heeh-input,
@@ -721,7 +722,7 @@ body {
 .heeh-select:focus,
 .heeh-textarea:focus {
   border-color: hsl(var(--heeh-color-primary));
-  box-shadow: 0 0 0 3px hsl(var(--heeh-color-primary) / 20%);
+  box-shadow: var(--heeh-shadow-focus);
   outline: none;
 }
 
@@ -735,11 +736,11 @@ body {
 .heeh-form-field--invalid .heeh-input,
 .heeh-form-field--invalid .heeh-select,
 .heeh-form-field--invalid .heeh-textarea {
-  border-color: hsl(0 72% 51%);
+  border-color: hsl(var(--heeh-color-danger));
 }
 
 .heeh-input--invalid {
-  border-color: hsl(0 72% 51%);
+  border-color: hsl(var(--heeh-color-danger));
 }
 
 .heeh-input--disabled {
@@ -749,7 +750,7 @@ body {
 
 .heeh-input.heeh-skin-cartoon-input {
   border: 3px solid currentColor;
-  border-radius: 1rem;
+  border-radius: var(--heeh-radius-2xl);
 }
 
 .heeh-input.heeh-skin-minimal-input {
@@ -786,9 +787,9 @@ body {
   position: relative;
   width: 2.5rem;
   height: 1.375rem;
-  border-radius: 999px;
+  border-radius: var(--heeh-radius-pill);
   background: hsl(var(--heeh-color-muted));
-  transition: background-color 120ms ease;
+  transition: background-color var(--heeh-motion-duration-fast) var(--heeh-motion-ease-standard);
 }
 
 .heeh-switch__thumb {
@@ -797,10 +798,10 @@ body {
   left: 0.1875rem;
   width: 1rem;
   height: 1rem;
-  border-radius: 999px;
-  background: hsl(var(--heeh-color-background));
-  box-shadow: 0 1px 3px rgb(15 23 42 / 20%);
-  transition: transform 120ms ease;
+  border-radius: var(--heeh-radius-pill);
+  background: var(--heeh-background-surface);
+  box-shadow: var(--heeh-shadow-sm);
+  transition: transform var(--heeh-motion-duration-fast) var(--heeh-motion-ease-emphasized);
 }
 
 .heeh-switch__input:checked + .heeh-switch__track {
@@ -835,7 +836,7 @@ body {
   height: 2.75rem;
   border: 1px solid hsl(var(--heeh-color-border));
   border-radius: var(--heeh-radius-md);
-  background: hsl(var(--heeh-color-background));
+  background: var(--heeh-background-surface);
   color: hsl(var(--heeh-color-foreground));
   font: inherit;
   font-size: var(--heeh-text-lg);
@@ -844,7 +845,7 @@ body {
 
 .heeh-otp__input:focus {
   border-color: hsl(var(--heeh-color-primary));
-  box-shadow: 0 0 0 3px hsl(var(--heeh-color-primary) / 20%);
+  box-shadow: var(--heeh-shadow-focus);
   outline: none;
 }
 
@@ -859,7 +860,7 @@ body {
   z-index: 50;
   display: grid;
   place-items: center;
-  background: rgb(15 23 42 / 45%);
+  background: var(--heeh-background-overlay);
   padding: var(--heeh-spacing-md);
 }
 
@@ -877,8 +878,8 @@ body {
 .heeh-flow-builder {
   border: 1px solid hsl(var(--heeh-color-border));
   border-radius: var(--heeh-radius-lg);
-  background: hsl(var(--heeh-color-background));
-  box-shadow: 0 16px 40px rgb(15 23 42 / 12%);
+  background: var(--heeh-background-surface);
+  box-shadow: var(--heeh-shadow-lg);
 }
 
 .heeh-dialog {
@@ -926,7 +927,7 @@ body {
   display: inline-flex;
   border-radius: var(--heeh-radius-md);
   background: hsl(var(--heeh-color-foreground));
-  color: hsl(var(--heeh-color-background));
+  color: hsl(var(--heeh-color-surface));
   padding: var(--heeh-spacing-xs) var(--heeh-spacing-sm);
   font-size: var(--heeh-text-sm);
 }
@@ -1034,14 +1035,14 @@ body {
 
 .heeh-selectable[data-selected] {
   border-color: hsl(var(--heeh-color-primary));
-  box-shadow: 0 0 0 3px hsl(var(--heeh-color-primary) / 15%);
+  box-shadow: var(--heeh-shadow-focus);
 }
 
 .heeh-fab {
   position: fixed;
   right: var(--heeh-spacing-lg);
   bottom: var(--heeh-spacing-lg);
-  border-radius: 999px;
+  border-radius: var(--heeh-radius-pill);
 }
 
 .heeh-carousel,
@@ -1063,7 +1064,7 @@ body {
   z-index: 60;
   display: grid;
   place-items: center;
-  background: rgb(0 0 0 / 80%);
+  background: var(--heeh-background-lightbox);
 }
 
 .heeh-code-viewer,
@@ -1071,7 +1072,7 @@ body {
 .heeh-diff-viewer pre {
   overflow: auto;
   border-radius: var(--heeh-radius-md);
-  background: hsl(var(--heeh-color-muted));
+  background: var(--heeh-background-muted);
   padding: var(--heeh-spacing-md);
 }
 
@@ -1110,7 +1111,7 @@ body {
   display: inline-flex;
   align-items: center;
   width: fit-content;
-  border-radius: 999px;
+  border-radius: var(--heeh-radius-pill);
   background: hsl(var(--heeh-color-muted));
   color: hsl(var(--heeh-color-foreground));
   padding: 0.125rem 0.5rem;
@@ -1129,8 +1130,8 @@ body {
   width: 2rem;
   height: 2rem;
   overflow: hidden;
-  border-radius: 999px;
-  background: hsl(var(--heeh-color-muted));
+  border-radius: var(--heeh-radius-pill);
+  background: var(--heeh-background-muted);
 }
 
 .heeh-avatar img {

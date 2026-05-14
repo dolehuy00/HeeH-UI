@@ -3,7 +3,7 @@
   top: 0;
   z-index: 20;
   border-bottom: 1px solid hsl(var(--heeh-color-border));
-  background: hsl(var(--heeh-color-background) / 92%);
+  background: var(--heeh-background-chrome);
   backdrop-filter: blur(14px);
 }
 
@@ -38,7 +38,7 @@
   border: 2px solid currentColor;
   border-radius: var(--heeh-radius-md);
   background: hsl(var(--heeh-color-primary));
-  box-shadow: 4px 4px 0 currentColor;
+  box-shadow: var(--heeh-shadow-cartoon);
 }
 
 .marketing-navlinks {
@@ -79,7 +79,7 @@
 .marketing-eyebrow {
   width: fit-content;
   border: 1px solid hsl(var(--heeh-color-border));
-  border-radius: 999px;
+  border-radius: var(--heeh-radius-pill);
   padding: 0.25rem 0.625rem;
 }
 
@@ -117,7 +117,7 @@
 .marketing-preview__toolbar span {
   width: 0.75rem;
   height: 0.75rem;
-  border-radius: 999px;
+  border-radius: var(--heeh-radius-pill);
   background: hsl(var(--heeh-color-muted-foreground));
 }
 
@@ -156,7 +156,7 @@
   width: 2.25rem;
   height: 2.25rem;
   border: 2px solid currentColor;
-  border-radius: 999px;
+  border-radius: var(--heeh-radius-pill);
   background: hsl(var(--heeh-color-primary));
 }
 
@@ -178,7 +178,7 @@
   width: 0.5rem;
   height: 0.5rem;
   margin-right: var(--heeh-spacing-sm);
-  border-radius: 999px;
+  border-radius: var(--heeh-radius-pill);
   background: hsl(var(--heeh-color-primary));
   vertical-align: middle;
 }
