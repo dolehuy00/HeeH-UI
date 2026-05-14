@@ -2,6 +2,8 @@
 
 This document reconstructs the development path of HeeH UI from the commit history of the `HeeH-UI` repository, up to the latest reviewed commit `e5ca23f` on 2026-05-13.
 
+It also records the post-commit implementation phases that happened after that commit in the current working tree.
+
 ## Development Direction
 
 HeeH UI is being built as a scalable React UI library for enterprise products, design systems, and data-heavy interfaces. The current architecture separates responsibilities into clear layers:
@@ -307,33 +309,161 @@ Result:
 - Dependency rules, component contracts, and performance expectations were made clearer.
 - The development history from skeleton to current architecture was reflected in project documentation.
 
+## Post-Commit Implementation Phases
+
+The following phases were implemented after the initial commit-based roadmap above. They are not tied to committed hashes yet, but they describe the current direction of the working tree.
+
+### Phase 1. Skin Contract v1
+
+The skin contract was expanded from a button-only contract into a minimum usable UI surface:
+
+- `button`
+- `card`
+- `surface`
+- `heading`
+- `text`
+- `input`
+- `section`
+
+The contract now lives in `@heeh-ui/theme` through `UISkin` and related skin prop/function types. The three existing skins implement the contract:
+
+- `office`
+- `cartoon`
+- `minimal`
+
+Core/form/layout consumers were connected to the active skin through `useSkin()`:
+
+- `Button`
+- `Card`
+- `Surface`
+- `Heading`
+- `Text`
+- `Input`
+- `Section`
+
+Result:
+
+- The active skin can style more than just buttons.
+- Core remains free from direct skin preset imports.
+- Apps can switch visual identity through `UIProvider` while reusing the same component behavior.
+
+### Phase 2. Marketing App Stress Test
+
+A new Next.js app was added under:
+
+```txt
+apps/marketing
+```
+
+The app was created to stress-test the skin contract in a real landing-page flow instead of evaluating the design system only through isolated components.
+
+The current marketing page flow is:
+
+```txt
+Navbar
+Hero
+FeatureGrid
+CTA
+Footer
+```
+
+It includes:
+
+- skin switching between `office`, `cartoon`, and `minimal`
+- light/dark theme switching
+- repeated use of `Button`, `Card`, `Heading`, `Text`, `Input`, and `Section`
+- static export via Next.js `output: "export"`
+
+Pricing and billing-related sections were intentionally removed to keep the project aligned with an open-source direction.
+
+Result:
+
+- The contract is now exercised in a realistic app.
+- Several contract gaps became visible, especially around card anatomy, responsive layout, and form coverage.
+- The app can serve as a practical regression surface for future skin contract changes.
+
+### Phase 3. Token Polish
+
+The token layer was expanded beyond basic colors, spacing, and small radius values.
+
+New token groups include:
+
+- semantic colors: `info`, `success`, `warning`, `danger`
+- foreground pairs for semantic colors
+- surface/accent/secondary colors
+- background tokens: `body`, `surface`, `muted`, `accent`, `chrome`, `overlay`, `lightbox`
+- gradient tokens: `hero`, `surface`, `accent`
+- shadow scale: `xs`, `sm`, `md`, `lg`, `xl`, `focus`, `cartoon`
+- radius scale: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `pill`
+- motion tokens: duration and easing primitives
+
+The styles package was updated to consume these tokens instead of relying on scattered hard-coded values for focus rings, shadows, danger colors, overlay backgrounds, motion durations, and pill radius.
+
+Result:
+
+- Skins have a richer visual foundation.
+- The marketing app and Storybook now exercise more realistic visual tokens.
+- Light and dark modes have more complete semantic coverage.
+
+### Phase 4. Production Cleanup
+
+The production cleanup phase focused on making the project easier to open-source and easier to reason about.
+
+Completed cleanup:
+
+- removed page/demo inline styles from marketing, playground, and Storybook examples
+- moved demo layout styling into local CSS files
+- documented the skin contract in `packages/skins/README.md`
+- added Storybook examples per skin in `apps/docs/src/skin-contract.stories.tsx`
+- switched app/demo imports from the root skins barrel to explicit subpath imports:
+  - `@heeh-ui/skins/office`
+  - `@heeh-ui/skins/cartoon`
+  - `@heeh-ui/skins/minimal`
+- updated Turborepo outputs for Next/Storybook build artifacts
+- added Next/static build outputs to `.gitignore`
+- removed billing/pricing language from the marketing app
+
+Some inline styles intentionally remain in runtime components where the value is dynamic and data-driven, for example progress width, aspect ratio, and table column width.
+
+Result:
+
+- The app examples are cleaner and less dependent on ad hoc inline styles.
+- Bundle boundaries for skins are clearer.
+- The project is closer to an open-source-ready presentation.
+
 ## Current State
 
-As of commit `e5ca23f`, HeeH UI has:
+As of the current working tree, HeeH UI has:
 
 - A `pnpm` + Turborepo monorepo with `build`, `dev`, `lint`, `typecheck`, and `clean` scripts.
 - `apps/docs` using Storybook for component documentation.
 - `apps/playground` using Vite for integration testing.
+- `apps/marketing` using Next.js for a simple open-source-friendly landing page.
 - A reasonably broad core primitive set for layout, typography, media, and basic interaction.
 - A skin package with three initial presets: `office`, `minimal`, and `cartoon`.
+- A v1 skin contract covering button, card, surface, heading, text, input, and section.
 - A theme provider with `useTheme`, `useSkin`, theme mode, and active skin context.
-- Styles and tokens layers for CSS variables and global CSS.
+- Expanded styles and tokens layers for semantic colors, backgrounds, gradients, shadows, radius, and motion.
 - Specialized packages for forms, data display, charts, patterns, hooks, icons, and utils.
 - A README that documents the architecture and development contract.
+- A dedicated `packages/skins/README.md` documenting skin contract usage and import rules.
 
 ## Recommended Next Steps
 
-The current commits establish the foundation. The next priorities should be:
+The current working tree establishes the first usable foundation. The next priorities should be:
 
-1. Expand the skin contract beyond `button`.
-2. Ensure public components in `packages/components` bind through `useSkin()` instead of directly styling or importing multiple skins.
-3. Add controlled/uncontrolled behavior to stateful components.
+1. Expand `Input` contract coverage to `Textarea`, `Select`, and related controls.
+2. Add card anatomy/density support so cards can own header/body/footer spacing without page CSS.
+3. Add responsive layout primitives or section/grid variants to reduce app-level layout CSS.
 4. Add accessibility primitives for overlays, navigation, form fields, and interactions.
 5. Replace the `VirtualTable` and `VirtualList` aliases with real virtualization when handling large collections.
-6. Add tests or story verification for important component APIs.
-7. Check dependency direction so `core` does not import upward into `components`, `forms`, `patterns`, or `skins`.
-8. Expand documentation by package: core, theme, skins, forms, data-display, and components.
+6. Add tests or story verification for important component APIs and skin contract outputs.
+7. Check dependency direction continuously so `core` does not import upward into `components`, `forms`, `patterns`, or `skins`.
+8. Expand package-level documentation for core, theme, forms, data-display, and components.
+9. Prepare open-source hygiene: package metadata, contribution guide, license/readme review, and public examples.
 
 ## Conclusion
 
-The roadmap so far shows a sensible build order: create the workspace, define package boundaries, build core primitives, separate skins and theme runtime, then expand the public component layer and documentation. The foundation is in place. The next phase should focus on tightening the contracts between `core`, `theme`, `skins`, and `components`, while increasing confidence through accessibility work, virtualization, and tests.
+The roadmap so far shows a sensible build order: create the workspace, define package boundaries, build core primitives, separate skins and theme runtime, expand the skin contract, then validate the system through a real marketing app.
+
+The foundation is now usable, but still early. The next phase should focus on moving repeated page-level decisions back into reusable contracts, strengthening accessibility and responsive behavior, and preparing the repository for an open-source release.
