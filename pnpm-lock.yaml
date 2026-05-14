@@ -149,6 +149,9 @@ importers:
       '@heeh-ui/forms':
         specifier: workspace:*
         version: link:../forms
+      '@heeh-ui/theme':
+        specifier: workspace:*
+        version: link:../theme
       '@heeh-ui/utils':
         specifier: workspace:*
         version: link:../utils
@@ -203,6 +206,9 @@ importers:
 
   packages/forms:
     dependencies:
+      '@heeh-ui/theme':
+        specifier: workspace:*
+        version: link:../theme
       '@heeh-ui/utils':
         specifier: workspace:*
         version: link:../utils

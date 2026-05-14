@@ -1,10 +1,12 @@
 import * as React from "react";
-import { cn } from "@heeh-ui/utils";
+import { useSkin, type SurfaceSkinProps } from "@heeh-ui/theme";
 
 export type SurfaceProps = React.HTMLAttributes<HTMLDivElement> & {
-  tone?: "default" | "muted" | "elevated";
+  tone?: SurfaceSkinProps["tone"];
 };
 
 export function Surface({ tone = "default", className, ...props }: SurfaceProps) {
-  return <div className={cn("heeh-surface", `heeh-surface--${tone}`, className)} {...props} />;
+  const skin = useSkin();
+
+  return <div className={skin.surface({ tone, className })} {...props} />;
 }

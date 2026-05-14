@@ -277,6 +277,45 @@ body {
   box-shadow: 0 12px 32px rgb(15 23 42 / 10%);
 }
 
+.heeh-section {
+  display: grid;
+}
+
+.heeh-section--sm {
+  gap: var(--heeh-spacing-sm);
+  padding-block: var(--heeh-spacing-lg);
+}
+
+.heeh-section--md {
+  gap: var(--heeh-spacing-md);
+  padding-block: var(--heeh-spacing-xl);
+}
+
+.heeh-section--lg {
+  gap: var(--heeh-spacing-lg);
+  padding-block: calc(var(--heeh-spacing-xl) * 1.5);
+}
+
+.heeh-section--xl {
+  gap: var(--heeh-spacing-xl);
+  padding-block: calc(var(--heeh-spacing-xl) * 2);
+}
+
+.heeh-section--default {
+  background: transparent;
+  color: hsl(var(--heeh-color-foreground));
+}
+
+.heeh-section--muted {
+  background: hsl(var(--heeh-color-muted));
+  color: hsl(var(--heeh-color-foreground));
+}
+
+.heeh-section--accent {
+  background: hsl(var(--heeh-color-primary));
+  color: hsl(var(--heeh-color-primary-foreground));
+}
+
 .heeh-button {
   display: inline-flex;
   align-items: center;
@@ -436,10 +475,116 @@ body {
   border-bottom-color: transparent;
 }
 
+.heeh-skin-office-surface,
+.heeh-skin-office-card,
+.heeh-skin-office-input {
+  border-radius: var(--heeh-radius-lg);
+}
+
+.heeh-skin-office-heading {
+  letter-spacing: 0;
+}
+
+.heeh-skin-office-text {
+  line-height: 1.65;
+}
+
+.heeh-skin-office-input {
+  box-shadow: 0 1px 2px rgb(15 23 42 / 6%);
+}
+
+.heeh-skin-office-card--elevated {
+  box-shadow: 0 16px 40px rgb(15 23 42 / 12%);
+}
+
+.heeh-skin-office-section--accent {
+  background: hsl(var(--heeh-color-primary));
+  color: hsl(var(--heeh-color-primary-foreground));
+}
+
+.heeh-skin-cartoon-surface,
+.heeh-skin-cartoon-card,
+.heeh-skin-cartoon-input {
+  border: 3px solid currentColor;
+  border-radius: 1rem;
+}
+
+.heeh-skin-cartoon-card,
+.heeh-skin-cartoon-surface--elevated {
+  box-shadow: 6px 6px 0 currentColor;
+}
+
+.heeh-skin-cartoon-heading {
+  font-weight: 900;
+}
+
+.heeh-skin-cartoon-text {
+  line-height: 1.7;
+}
+
+.heeh-skin-cartoon-section--accent {
+  background: hsl(48 96% 62%);
+  color: hsl(224 71% 4%);
+}
+
+.heeh-skin-minimal-surface,
+.heeh-skin-minimal-card,
+.heeh-skin-minimal-input {
+  border-radius: 0;
+}
+
+.heeh-skin-minimal-card {
+  border-inline: 0;
+  border-top: 0;
+}
+
+.heeh-skin-minimal-heading {
+  font-weight: 600;
+}
+
+.heeh-skin-minimal-text {
+  line-height: 1.7;
+}
+
+.heeh-skin-minimal-input {
+  border-inline: 0;
+  border-top: 0;
+}
+
+.heeh-skin-minimal-section--accent {
+  border-block: 1px solid hsl(var(--heeh-color-border));
+  background: transparent;
+  color: hsl(var(--heeh-color-foreground));
+}
+
 .heeh-card {
   border: 1px solid hsl(var(--heeh-color-border));
   border-radius: var(--heeh-radius-lg);
   background: hsl(var(--heeh-color-background));
+}
+
+.heeh-card--elevated {
+  box-shadow: 0 16px 40px rgb(15 23 42 / 12%);
+}
+
+.heeh-card--outline {
+  background: transparent;
+}
+
+.heeh-card.heeh-skin-cartoon-card {
+  border: 3px solid currentColor;
+  border-radius: 1rem;
+}
+
+.heeh-card.heeh-skin-cartoon-card,
+.heeh-card.heeh-skin-cartoon-card--elevated {
+  box-shadow: 6px 6px 0 currentColor;
+}
+
+.heeh-card.heeh-skin-minimal-card {
+  border-inline: 0;
+  border-top: 0;
+  border-radius: 0;
 }
 
 .heeh-card__header,
@@ -548,6 +693,24 @@ body {
   padding: 0 var(--heeh-spacing-md);
 }
 
+.heeh-input--sm {
+  min-height: 2rem;
+  padding-inline: var(--heeh-spacing-sm);
+  font-size: var(--heeh-text-sm);
+}
+
+.heeh-input--md {
+  min-height: 2.5rem;
+  padding-inline: var(--heeh-spacing-md);
+  font-size: var(--heeh-text-md);
+}
+
+.heeh-input--lg {
+  min-height: 2.75rem;
+  padding-inline: var(--heeh-spacing-lg);
+  font-size: var(--heeh-text-md);
+}
+
 .heeh-textarea {
   min-height: 6rem;
   padding: var(--heeh-spacing-sm) var(--heeh-spacing-md);
@@ -573,6 +736,26 @@ body {
 .heeh-form-field--invalid .heeh-select,
 .heeh-form-field--invalid .heeh-textarea {
   border-color: hsl(0 72% 51%);
+}
+
+.heeh-input--invalid {
+  border-color: hsl(0 72% 51%);
+}
+
+.heeh-input--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.heeh-input.heeh-skin-cartoon-input {
+  border: 3px solid currentColor;
+  border-radius: 1rem;
+}
+
+.heeh-input.heeh-skin-minimal-input {
+  border-inline: 0;
+  border-top: 0;
+  border-radius: 0;
 }
 
 .heeh-choice,

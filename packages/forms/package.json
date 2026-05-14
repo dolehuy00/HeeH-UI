@@ -19,6 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
+    "@heeh-ui/theme": "workspace:*",
     "@heeh-ui/utils": "workspace:*",
     "react": "^19.2.6"
   },

@@ -1,9 +1,9 @@
 import * as React from "react";
-import { cn } from "@heeh-ui/utils";
+import { useSkin, type HeadingSkinProps } from "@heeh-ui/theme";
 
 export type HeadingProps = React.HTMLAttributes<HTMLHeadingElement> & {
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  size?: "sm" | "md" | "lg" | "xl";
+  size?: HeadingSkinProps["size"];
 };
 
 export function Heading({
@@ -12,5 +12,7 @@ export function Heading({
   className,
   ...props
 }: HeadingProps) {
-  return <Component className={cn("heeh-heading", `heeh-heading--${size}`, className)} {...props} />;
+  const skin = useSkin();
+
+  return <Component className={skin.heading({ size, className })} {...props} />;
 }

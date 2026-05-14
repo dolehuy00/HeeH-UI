@@ -1,10 +1,10 @@
 import * as React from "react";
-import { cn } from "@heeh-ui/utils";
+import { useSkin, type TextSkinProps } from "@heeh-ui/theme";
 
 export type TextProps = React.HTMLAttributes<HTMLParagraphElement> & {
   as?: "p" | "span" | "div";
-  size?: "sm" | "md" | "lg";
-  tone?: "default" | "muted" | "danger";
+  size?: TextSkinProps["size"];
+  tone?: TextSkinProps["tone"];
 };
 
 export function Text({
@@ -14,10 +14,7 @@ export function Text({
   className,
   ...props
 }: TextProps) {
-  return (
-    <Component
-      className={cn("heeh-text", `heeh-text--${size}`, `heeh-text--${tone}`, className)}
-      {...props}
-    />
-  );
+  const skin = useSkin();
+
+  return <Component className={skin.text({ size, tone, className })} {...props} />;
 }

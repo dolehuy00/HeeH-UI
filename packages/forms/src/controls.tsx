@@ -1,12 +1,31 @@
 import * as React from "react";
+import { useSkin, type InputSkinProps } from "@heeh-ui/theme";
 import { cn } from "@heeh-ui/utils";
 
-export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
+type NativeInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "className" | "size">;
+
+type ClassNameProp = {
+  className?: string;
+};
+
+export type InputProps = NativeInputProps & InputSkinProps;
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...props }, ref) => (
-    <input ref={ref} className={cn("heeh-input", className)} {...props} />
-  )
+  ({ className, size, state, disabled, "aria-invalid": ariaInvalid, ...props }, ref) => {
+    const skin = useSkin();
+    const isInvalid = ariaInvalid === true || ariaInvalid === "true";
+    const resolvedState = state ?? (isInvalid ? "invalid" : "default");
+
+    return (
+      <input
+        ref={ref}
+        className={skin.input({ size, state: resolvedState, disabled, className })}
+        disabled={disabled}
+        aria-invalid={ariaInvalid}
+        {...props}
+      />
+    );
+  }
 );
 
 Input.displayName = "Input";
@@ -74,7 +93,8 @@ export const Autocomplete = React.forwardRef<HTMLInputElement, AutocompleteProps
 
 Autocomplete.displayName = "Autocomplete";
 
-export type CheckboxProps = Omit<InputProps, "type"> & {
+export type CheckboxProps = Omit<NativeInputProps, "type"> &
+  ClassNameProp & {
   label?: React.ReactNode;
 };
 
@@ -89,7 +109,8 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
 
 Checkbox.displayName = "Checkbox";
 
-export type RadioProps = Omit<InputProps, "type"> & {
+export type RadioProps = Omit<NativeInputProps, "type"> &
+  ClassNameProp & {
   label?: React.ReactNode;
 };
 
@@ -104,7 +125,8 @@ export const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
 
 Radio.displayName = "Radio";
 
-export type SwitchProps = Omit<InputProps, "type"> & {
+export type SwitchProps = Omit<NativeInputProps, "type"> &
+  ClassNameProp & {
   label?: React.ReactNode;
 };
 
@@ -122,7 +144,7 @@ export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
 
 Switch.displayName = "Switch";
 
-export type SliderProps = Omit<InputProps, "type">;
+export type SliderProps = Omit<NativeInputProps, "type"> & ClassNameProp;
 
 export const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
   ({ className, ...props }, ref) => (

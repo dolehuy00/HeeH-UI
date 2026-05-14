@@ -1,12 +1,22 @@
 import * as React from "react";
+import { useSkin, type SectionSkinProps } from "@heeh-ui/theme";
 import { cn } from "@heeh-ui/utils";
 
 export function PageLayout({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return <div className={cn("heeh-page-layout", className)} {...props} />;
 }
 
-export function Section({ className, ...props }: React.HTMLAttributes<HTMLElement>) {
-  return <section className={cn("heeh-section", className)} {...props} />;
+export type SectionProps = React.HTMLAttributes<HTMLElement> & SectionSkinProps;
+
+export function Section({
+  spacing = "md",
+  tone = "default",
+  className,
+  ...props
+}: SectionProps) {
+  const skin = useSkin();
+
+  return <section className={skin.section({ spacing, tone, className })} {...props} />;
 }
 
 export function Panel({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {

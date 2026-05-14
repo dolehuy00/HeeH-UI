@@ -1,9 +1,13 @@
 import * as React from "react";
-import { cn } from "@heeh-ui/utils";
-import { Surface, type SurfaceProps } from "./surface";
+import { useSkin, type CardSkinProps } from "@heeh-ui/theme";
 
-export type CardProps = SurfaceProps;
+export type CardProps = React.HTMLAttributes<HTMLDivElement> & {
+  tone?: CardSkinProps["tone"];
+  variant?: CardSkinProps["variant"];
+};
 
-export function Card({ className, ...props }: CardProps) {
-  return <Surface className={cn("heeh-card", className)} {...props} />;
+export function Card({ tone = "default", variant = "default", className, ...props }: CardProps) {
+  const skin = useSkin();
+
+  return <div className={skin.card({ tone, variant, className })} {...props} />;
 }
