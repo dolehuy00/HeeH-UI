@@ -93,6 +93,9 @@ importers:
       '@heeh-ui/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@heeh-ui/data-display':
+        specifier: workspace:*
+        version: link:../../packages/data-display
       '@heeh-ui/forms':
         specifier: workspace:*
         version: link:../../packages/forms

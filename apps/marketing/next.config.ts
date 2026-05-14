@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   transpilePackages: [
     "@heeh-ui/components",
     "@heeh-ui/core",
+    "@heeh-ui/data-display",
     "@heeh-ui/forms",
     "@heeh-ui/skins",
     "@heeh-ui/styles",

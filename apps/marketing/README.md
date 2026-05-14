@@ -1,38 +1,60 @@
-# HeeH UI Marketing App
+# HeeH UI Component Gallery
 
-This app is a small Next.js landing page built to stress-test the HeeH UI skin contract in a real page flow.
+This app is a small Next.js component gallery and playground for stress-testing the HeeH UI skin contract.
 
-It intentionally uses the current contract surface:
-
-- `button`
-- `card`
-- `surface`
-- `heading`
-- `text`
-- `input`
-- `section`
-
-The goal is not to create a polished product site first. The goal is to force the design system to reveal where the skin contract is strong, where it is thin, and which component APIs need to grow next.
-
-## Page Structure
-
-The landing page follows a simple marketing flow:
+It replaces the earlier promotional landing page with a more useful open-source surface:
 
 ```txt
-Navbar
-Hero
-FeatureGrid
-CTA
-Footer
+Header: theme switch + skin switch + density switch
+Sidebar: component navigation
+Main: component docs, previews, variants, states, props, and skin notes
 ```
 
-The page includes a skin switcher for:
+The goal is to test components under real layout pressure while switching between `office`, `cartoon`, and `minimal` skins.
 
-- `office`
-- `cartoon`
-- `minimal`
+## Routes
 
-It also includes a light/dark theme toggle. This makes it easy to check whether the same page layout survives different visual identities and theme modes.
+```txt
+/
+/components
+/components/button
+/components/text-heading
+/components/card
+/components/input
+/components/modal
+/components/table
+/components/form-layout
+```
+
+The root route renders the same gallery shell as `/components`.
+
+## Structure
+
+```txt
+apps/marketing/
+  app/
+    layout.tsx
+    page.tsx
+    marketing.css
+    components/
+      layout.tsx
+      page.tsx
+      button/page.tsx
+      card/page.tsx
+      input/page.tsx
+  components-gallery/
+    GalleryShell.tsx
+    ComponentLayout.tsx
+    PreviewBox.tsx
+    VariantGrid.tsx
+    PropsTable.tsx
+    OverviewPage.tsx
+  demos/
+    button.demo.tsx
+    card.demo.tsx
+    input.demo.tsx
+    modal.demo.tsx
+```
 
 ## Run Locally
 
@@ -42,13 +64,13 @@ From the repository root:
 pnpm --filter @heeh-ui/marketing dev
 ```
 
-On Windows PowerShell, use:
+On Windows PowerShell:
 
 ```bash
 pnpm.cmd --filter @heeh-ui/marketing dev
 ```
 
-The app runs on the default Next.js port:
+Default URL:
 
 ```txt
 http://localhost:3000
@@ -62,7 +84,7 @@ pnpm.cmd --filter @heeh-ui/marketing exec next dev --hostname 0.0.0.0 -p 3001
 
 ## Build
 
-Build only the marketing app:
+Build only this app:
 
 ```bash
 pnpm --filter @heeh-ui/marketing build
@@ -74,65 +96,27 @@ Build the full workspace:
 pnpm build
 ```
 
-The app uses static export via `output: "export"` in `next.config.ts`, so the production output is written to:
+The app uses static export via `output: "export"` in `next.config.ts`, so production output is written to:
 
 ```txt
 apps/marketing/out
 ```
 
-## Files
-
-```txt
-apps/marketing/
-  app/
-    layout.tsx        # imports tokens, global styles, and page CSS
-    page.tsx          # landing page and skin/theme switching
-    marketing.css     # page-level layout CSS
-  next.config.ts      # Next config and workspace package transpilation
-  package.json
-  tsconfig.json
-```
-
 ## What This App Tests
 
-This page uses HeeH UI packages as a consuming app would:
+- `@heeh-ui/core`: Button, Card, Surface, Heading, Text, Grid, Stack, Container.
+- `@heeh-ui/forms`: Input and nearby form controls.
+- `@heeh-ui/components`: Section and Dialog/Modal composition.
+- `@heeh-ui/data-display`: Table and Tag density checks.
+- `@heeh-ui/theme`: UIProvider, useTheme, and active skin injection.
+- `@heeh-ui/skins/office`, `@heeh-ui/skins/cartoon`, and `@heeh-ui/skins/minimal`: explicit skin imports.
 
-- `@heeh-ui/core` for primitives like `Button`, `Card`, `Container`, `Grid`, `Heading`, `Stack`, and `Text`.
-- `@heeh-ui/components` for `Section`.
-- `@heeh-ui/forms` for `Input`.
-- `@heeh-ui/theme` for `UIProvider`, `useTheme`, and active skin injection.
-- `@heeh-ui/skins/office`, `@heeh-ui/skins/cartoon`, and `@heeh-ui/skins/minimal` for explicit skin imports.
-- `@heeh-ui/tokens/css` and `@heeh-ui/styles/css` for styling foundations.
+## Current Contract Gaps
 
-The page deliberately repeats cards, text, buttons, inputs, and sections across different density levels: hero, dashboard preview, feature cards, and CTA form.
+This gallery intentionally makes unresolved v1 gaps visible:
 
-## Contract Gaps Found
-
-The app builds and runs, but it exposes useful gaps in the current v1 contract:
-
-1. `Card` needs richer skin-aware structure.
-   Current card styling works for simple boxes, but marketing cards need better control over padding, header/body/footer spacing, density, and emphasis.
-
-2. `Grid` is not skin-aware or responsive by contract.
-   The page still needs custom CSS for responsive feature grids.
-
-3. `Input` only covers the base native input.
-   `Textarea`, `Select`, and related form controls do not yet use the skin contract.
-
-4. `Section` needs stronger layout semantics.
-   A marketing page needs section width, background treatment, spacing scale, and content alignment to be more systematic.
-
-5. Page CSS is still doing too much visual work.
-   `marketing.css` is useful for stress testing, but some repeated decisions should eventually move into components, tokens, or skin functions.
-
-## Current Status
-
-The marketing app is a working proof that skin contract v1 is usable for a simple promotional page.
-
-It is also a practical checklist for contract v2:
-
-- expand card anatomy
-- add responsive layout primitives
-- bring select/textarea into the input contract
-- improve section semantics
-- reduce page-specific CSS by moving reusable decisions into the system
+- Card and Surface need richer anatomy, padding, and interactive state contracts.
+- Select, Textarea, Checkbox, Switch, and Slider are still mostly shared-style controls, while Input is skin-aware.
+- Modal sizing, overlay treatment, and dialog anatomy are not yet fully skin-contract driven.
+- Table density, sorting, selection, loading, and empty states are not modeled yet.
+- Form layout has useful primitives, but field state semantics need to grow beyond invalid.

@@ -11,6 +11,7 @@ export * from "./image";
 export * from "./label";
 export * from "./link";
 export * from "./separator";
+export * from "./segmented-control";
 export * from "./stack";
 export * from "./surface";
 export * from "./text";
