@@ -80,7 +80,7 @@ export const Overview: Story = {
                 ]}
                 data={rows}
               />
-              <MetricCard label="Revenue" value="$24.8k" trend="+12%" />
+              <MetricCard label="Usage" value="24.8k" trend="+12%" />
               <Stack direction="row" gap="sm">
                 <Avatar fallback="H" />
                 <Tag>Design system</Tag>

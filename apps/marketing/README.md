@@ -22,7 +22,6 @@ The landing page follows a simple marketing flow:
 Navbar
 Hero
 FeatureGrid
-Pricing
 CTA
 Footer
 ```
@@ -105,7 +104,7 @@ This page uses HeeH UI packages as a consuming app would:
 - `@heeh-ui/skins/office`, `@heeh-ui/skins/cartoon`, and `@heeh-ui/skins/minimal` for explicit skin imports.
 - `@heeh-ui/tokens/css` and `@heeh-ui/styles/css` for styling foundations.
 
-The page deliberately repeats cards, text, buttons, inputs, and sections across different density levels: hero, dashboard preview, feature cards, pricing cards, and CTA form.
+The page deliberately repeats cards, text, buttons, inputs, and sections across different density levels: hero, dashboard preview, feature cards, and CTA form.
 
 ## Contract Gaps Found
 
@@ -115,7 +114,7 @@ The app builds and runs, but it exposes useful gaps in the current v1 contract:
    Current card styling works for simple boxes, but marketing cards need better control over padding, header/body/footer spacing, density, and emphasis.
 
 2. `Grid` is not skin-aware or responsive by contract.
-   The page still needs custom CSS for responsive feature and pricing grids.
+   The page still needs custom CSS for responsive feature grids.
 
 3. `Input` only covers the base native input.
    `Textarea`, `Select`, and related form controls do not yet use the skin contract.

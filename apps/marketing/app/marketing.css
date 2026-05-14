@@ -100,7 +100,6 @@
 
 .marketing-preview,
 .marketing-feature-card,
-.marketing-price-card,
 .marketing-cta__card {
   padding: var(--heeh-spacing-lg);
 }
@@ -165,13 +164,11 @@
   height: 64%;
 }
 
-.marketing-feature-grid,
-.marketing-pricing-grid {
+.marketing-feature-grid {
   align-items: stretch;
 }
 
-.marketing-feature-card,
-.marketing-price-card {
+.marketing-feature-card {
   height: 100%;
 }
 
@@ -246,8 +243,7 @@
   }
 
   .marketing-hero__grid,
-  .marketing-feature-grid,
-  .marketing-pricing-grid {
+  .marketing-feature-grid {
     grid-template-columns: 1fr;
   }
 }

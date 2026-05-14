@@ -42,27 +42,6 @@ const features = [
   }
 ];
 
-const plans = [
-  {
-    name: "Starter",
-    price: "$0",
-    description: "For prototypes and internal experiments.",
-    features: ["Core primitives", "Theme provider", "Office skin"]
-  },
-  {
-    name: "Team",
-    price: "$19",
-    description: "For product teams building real flows.",
-    features: ["All starter features", "Multiple skins", "Forms and layouts"]
-  },
-  {
-    name: "System",
-    price: "$49",
-    description: "For teams standardizing a visual language.",
-    features: ["Skin contract v1", "Docs surface", "Landing and app patterns"]
-  }
-];
-
 function MarketingShell() {
   const [skinName, setSkinName] = React.useState("office");
 
@@ -92,7 +71,6 @@ function LandingPage({
       />
       <Hero />
       <FeatureGrid />
-      <Pricing />
       <CTA />
       <Footer />
     </main>
@@ -119,7 +97,6 @@ function Navbar({
         </a>
         <nav className="marketing-navlinks" aria-label="Primary navigation">
           <a href="#features">Features</a>
-          <a href="#pricing">Pricing</a>
           <a href="#cta">Start</a>
         </nav>
         <div className="marketing-controls" aria-label="Theme and skin controls">
@@ -225,50 +202,6 @@ function FeatureGrid() {
                   <span className="marketing-feature-card__icon" aria-hidden="true" />
                   <Heading as="h3" size="md">{feature.title}</Heading>
                   <Text tone="muted">{feature.description}</Text>
-                </Stack>
-              </Card>
-            ))}
-          </Grid>
-        </Stack>
-      </Container>
-    </Section>
-  );
-}
-
-function Pricing() {
-  return (
-    <Section id="pricing" spacing="xl" tone="default">
-      <Container size="xl">
-        <Stack gap="lg">
-          <Stack gap="sm" className="marketing-section-heading">
-            <Heading as="h2" size="lg">Pricing that tests cards, text, and buttons</Heading>
-            <Text size="lg" tone="muted">
-              Three card densities, repeated call-to-actions, and enough copy to make skin
-              spacing choices visible.
-            </Text>
-          </Stack>
-          <Grid columns={3} gap="lg" className="marketing-pricing-grid">
-            {plans.map((plan, index) => (
-              <Card
-                key={plan.name}
-                variant={index === 1 ? "elevated" : "outline"}
-                tone={index === 1 ? "elevated" : "default"}
-                className="marketing-price-card"
-              >
-                <Stack gap="lg">
-                  <Stack gap="xs">
-                    <Text as="span" tone="muted">{plan.name}</Text>
-                    <Heading as="h3" size="xl">{plan.price}</Heading>
-                    <Text tone="muted">{plan.description}</Text>
-                  </Stack>
-                  <ul className="marketing-plan-list">
-                    {plan.features.map((feature) => (
-                      <li key={feature}>{feature}</li>
-                    ))}
-                  </ul>
-                  <Button variant={index === 1 ? "primary" : "outline"}>
-                    Choose {plan.name}
-                  </Button>
                 </Stack>
               </Card>
             ))}
