@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Composition: Story = {
   render: () => (
-    <Container size="md" style={{ paddingBlock: 32 }}>
+    <Container size="md" className="docs-canvas docs-canvas--sm">
       <Stack gap="lg">
         <Stack gap="xs">
           <Heading as="h1" size="lg">
@@ -38,7 +38,7 @@ export const Composition: Story = {
           </Text>
         </Stack>
 
-        <Card tone="elevated" style={{ padding: 24 }}>
+        <Card tone="elevated" className="docs-card">
           <Stack gap="md">
             <Flex align="center" justify="between" wrap>
               <Stack gap="xs">
@@ -58,7 +58,7 @@ export const Composition: Story = {
             <Separator />
 
             <Grid columns={2} gap="md">
-              <Surface tone="muted" style={{ padding: 16 }}>
+              <Surface tone="muted" className="docs-card--sm">
                 <Stack gap="xs">
                   <Heading as="h3" size="sm">
                     Surface
@@ -66,7 +66,7 @@ export const Composition: Story = {
                   <Text size="sm">Neutral content area.</Text>
                 </Stack>
               </Surface>
-              <Surface tone="elevated" style={{ padding: 16 }}>
+              <Surface tone="elevated" className="docs-card--sm">
                 <Stack gap="xs">
                   <Heading as="h3" size="sm">
                     Link

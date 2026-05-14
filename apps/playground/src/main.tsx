@@ -2,9 +2,12 @@ import * as React from "react";
 import { createRoot } from "react-dom/client";
 import "@heeh-ui/tokens/css";
 import "@heeh-ui/styles/css";
-import { Button, Stack } from "@heeh-ui/core";
+import "./playground.css";
+import { Button, Heading, Stack, Text } from "@heeh-ui/core";
 import { Card } from "@heeh-ui/components";
-import { cartoonSkin, minimalSkin, officeSkin } from "@heeh-ui/skins";
+import { cartoonSkin } from "@heeh-ui/skins/cartoon";
+import { minimalSkin } from "@heeh-ui/skins/minimal";
+import { officeSkin } from "@heeh-ui/skins/office";
 import { UIProvider, useTheme, type UISkin } from "@heeh-ui/theme";
 
 const skins: Record<string, UISkin> = {
@@ -33,13 +36,13 @@ function Playground({
   const { theme, setTheme } = useTheme();
 
   return (
-    <main style={{ maxWidth: 960, margin: "0 auto", padding: 32 }}>
+    <main className="playground-shell">
       <Stack gap="lg">
         <Stack gap="xs">
-          <h1 style={{ margin: 0 }}>HeeH UI Playground</h1>
-          <p style={{ margin: 0, color: "hsl(var(--heeh-color-muted-foreground))" }}>
+          <Heading as="h1" size="lg">HeeH UI Playground</Heading>
+          <Text tone="muted">
             Integration surface for tokens, theme, skins, primitives, and composed components.
-          </p>
+          </Text>
         </Stack>
 
         <Card title="Skin system" description={`Current skin: ${skinName}`}>

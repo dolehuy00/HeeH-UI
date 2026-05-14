@@ -15,8 +15,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <Container size="md" style={{ paddingBlock: 32 }}>
-      <Surface tone="muted" style={{ padding: 24 }}>
+    <Container size="md" className="docs-canvas docs-canvas--sm">
+      <Surface tone="muted" className="docs-card">
         <Text>Centered container content</Text>
       </Surface>
     </Container>

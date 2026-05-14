@@ -12,9 +12,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <Grid columns={3} gap="md" style={{ width: 640 }}>
+    <Grid columns={3} gap="md" className="docs-grid--wide">
       {["One", "Two", "Three"].map((item) => (
-        <Surface key={item} tone="muted" style={{ padding: 16 }}>
+        <Surface key={item} tone="muted" className="docs-card--sm">
           <Text>{item}</Text>
         </Surface>
       ))}

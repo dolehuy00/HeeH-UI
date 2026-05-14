@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Horizontal: Story = {
   render: () => (
-    <Stack gap="md" style={{ width: 320 }}>
+    <Stack gap="md" className="docs-stack--narrow">
       <Text>Above</Text>
       <Separator />
       <Text>Below</Text>
@@ -22,7 +22,7 @@ export const Horizontal: Story = {
 
 export const Vertical: Story = {
   render: () => (
-    <Flex align="center" gap="md" style={{ height: 48 }}>
+    <Flex align="center" gap="md" className="docs-flex--short">
       <Text>Left</Text>
       <Separator orientation="vertical" />
       <Text>Right</Text>

@@ -46,8 +46,8 @@ export const AllControls: Story = {
     const [range, setRange] = React.useState<[number, number]>([20, 80]);
 
     return (
-      <main style={{ maxWidth: 960, margin: "0 auto", padding: 32 }}>
-        <Card tone="elevated" style={{ padding: 24 }}>
+      <main className="docs-canvas docs-canvas--md">
+        <Card tone="elevated" className="docs-card">
           <Stack gap="lg">
             <FormSection
               title="Basic fields"

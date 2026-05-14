@@ -12,14 +12,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Tones: Story = {
   render: () => (
-    <Stack gap="md" style={{ width: 360 }}>
-      <Surface tone="default" style={{ padding: 16 }}>
+    <Stack gap="md" className="docs-stack--surface">
+      <Surface tone="default" className="docs-card--sm">
         <Text>Default surface</Text>
       </Surface>
-      <Surface tone="muted" style={{ padding: 16 }}>
+      <Surface tone="muted" className="docs-card--sm">
         <Text>Muted surface</Text>
       </Surface>
-      <Surface tone="elevated" style={{ padding: 16 }}>
+      <Surface tone="elevated" className="docs-card--sm">
         <Text>Elevated surface</Text>
       </Surface>
     </Stack>

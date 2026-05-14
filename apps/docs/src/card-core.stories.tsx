@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <Card tone="elevated" style={{ width: 320, padding: 20 }}>
+    <Card tone="elevated" className="docs-card--md docs-card--fixed">
       <Stack gap="xs">
         <Text>Core card</Text>
         <Text size="sm" tone="muted">

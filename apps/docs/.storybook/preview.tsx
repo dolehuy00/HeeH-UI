@@ -1,7 +1,10 @@
 import "@heeh-ui/tokens/css";
 import "@heeh-ui/styles/css";
+import "./docs.css";
 import type { Preview } from "@storybook/react-vite";
-import { cartoonSkin, minimalSkin, officeSkin } from "@heeh-ui/skins";
+import { cartoonSkin } from "@heeh-ui/skins/cartoon";
+import { minimalSkin } from "@heeh-ui/skins/minimal";
+import { officeSkin } from "@heeh-ui/skins/office";
 import { UIProvider, type UISkin } from "@heeh-ui/theme";
 
 const skins: Record<string, UISkin> = {

@@ -30,7 +30,7 @@ const rows = [
 
 export const Overview: Story = {
   render: () => (
-    <main style={{ maxWidth: 1120, margin: "0 auto", padding: 32 }}>
+    <main className="docs-canvas">
       <Stack gap="lg">
         <Stack gap="xs">
           <Heading as="h1" size="lg">
@@ -43,17 +43,17 @@ export const Overview: Story = {
         </Stack>
 
         <Grid columns={2} gap="md">
-          <Card tone="elevated" style={{ padding: 20 }}>
+          <Card tone="elevated" className="docs-card--md">
             <Stack gap="md">
               <Heading size="sm">Feedback</Heading>
               <Alert title="Heads up">This is an alert baseline.</Alert>
               <Progress value={64} />
-              <Skeleton style={{ height: 48 }} />
+              <Skeleton className="docs-skeleton--md" />
               <EmptyState title="No results" description="Try changing filters." />
             </Stack>
           </Card>
 
-          <Card tone="elevated" style={{ padding: 20 }}>
+          <Card tone="elevated" className="docs-card--md">
             <Stack gap="md">
               <Heading size="sm">Navigation</Heading>
               <Tabs
@@ -66,7 +66,7 @@ export const Overview: Story = {
             </Stack>
           </Card>
 
-          <Card tone="elevated" style={{ padding: 20 }}>
+          <Card tone="elevated" className="docs-card--md">
             <Stack gap="md">
               <Heading size="sm">Data display</Heading>
               <Table
@@ -88,7 +88,7 @@ export const Overview: Story = {
             </Stack>
           </Card>
 
-          <Card tone="elevated" style={{ padding: 20 }}>
+          <Card tone="elevated" className="docs-card--md">
             <Stack gap="md">
               <Heading size="sm">Patterns</Heading>
               <PermissionGuard allowed fallback="No access">

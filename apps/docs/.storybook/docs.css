@@ -1,0 +1,53 @@
+.docs-canvas {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding: 2rem;
+}
+
+.docs-canvas--md {
+  max-width: 960px;
+}
+
+.docs-canvas--sm {
+  max-width: 640px;
+}
+
+.docs-card {
+  padding: 1.5rem;
+}
+
+.docs-card--sm {
+  padding: 1rem;
+}
+
+.docs-card--md {
+  padding: 1.25rem;
+}
+
+.docs-card--fixed {
+  width: 320px;
+}
+
+.docs-stack--narrow {
+  width: 320px;
+}
+
+.docs-stack--surface {
+  width: 360px;
+}
+
+.docs-flex--wide {
+  width: 480px;
+}
+
+.docs-flex--short {
+  height: 48px;
+}
+
+.docs-grid--wide {
+  width: 640px;
+}
+
+.docs-skeleton--md {
+  height: 48px;
+}

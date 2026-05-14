@@ -4,7 +4,9 @@ import * as React from "react";
 import { Button, Card, Container, Grid, Heading, Stack, Text } from "@heeh-ui/core";
 import { Input } from "@heeh-ui/forms";
 import { Section } from "@heeh-ui/components";
-import { cartoonSkin, minimalSkin, officeSkin } from "@heeh-ui/skins";
+import { cartoonSkin } from "@heeh-ui/skins/cartoon";
+import { minimalSkin } from "@heeh-ui/skins/minimal";
+import { officeSkin } from "@heeh-ui/skins/office";
 import { UIProvider, useTheme, type ThemeMode, type UISkin } from "@heeh-ui/theme";
 
 const skins: Record<string, UISkin> = {
@@ -192,11 +194,11 @@ function ProductPreview() {
           </Card>
         </Grid>
         <div className="marketing-preview__chart" aria-hidden="true">
-          <span style={{ height: "38%" }} />
-          <span style={{ height: "58%" }} />
-          <span style={{ height: "46%" }} />
-          <span style={{ height: "76%" }} />
-          <span style={{ height: "64%" }} />
+          <span className="marketing-preview__bar marketing-preview__bar--low" />
+          <span className="marketing-preview__bar marketing-preview__bar--mid" />
+          <span className="marketing-preview__bar marketing-preview__bar--base" />
+          <span className="marketing-preview__bar marketing-preview__bar--high" />
+          <span className="marketing-preview__bar marketing-preview__bar--steady" />
         </div>
         <Input aria-label="Demo email input" placeholder="team@product.dev" />
       </Stack>

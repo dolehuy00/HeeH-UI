@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: () => (
-    <Flex align="center" gap="sm" justify="between" style={{ width: 480 }}>
+    <Flex align="center" gap="sm" justify="between" className="docs-flex--wide">
       <Button>Left</Button>
       <Button variant="outline">Right</Button>
     </Flex>

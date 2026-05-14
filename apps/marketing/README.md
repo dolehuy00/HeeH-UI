@@ -102,7 +102,7 @@ This page uses HeeH UI packages as a consuming app would:
 - `@heeh-ui/components` for `Section`.
 - `@heeh-ui/forms` for `Input`.
 - `@heeh-ui/theme` for `UIProvider`, `useTheme`, and active skin injection.
-- `@heeh-ui/skins` for `officeSkin`, `cartoonSkin`, and `minimalSkin`.
+- `@heeh-ui/skins/office`, `@heeh-ui/skins/cartoon`, and `@heeh-ui/skins/minimal` for explicit skin imports.
 - `@heeh-ui/tokens/css` and `@heeh-ui/styles/css` for styling foundations.
 
 The page deliberately repeats cards, text, buttons, inputs, and sections across different density levels: hero, dashboard preview, feature cards, pricing cards, and CTA form.

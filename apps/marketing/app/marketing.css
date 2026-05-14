@@ -138,8 +138,31 @@
 
 .marketing-preview__chart span {
   display: block;
-  border-radius: var(--heeh-radius-md) var(--heeh-radius-md) 0 0;
   background: hsl(var(--heeh-color-primary));
+}
+
+.marketing-preview__bar {
+  border-radius: var(--heeh-radius-md) var(--heeh-radius-md) 0 0;
+}
+
+.marketing-preview__bar--low {
+  height: 38%;
+}
+
+.marketing-preview__bar--mid {
+  height: 58%;
+}
+
+.marketing-preview__bar--base {
+  height: 46%;
+}
+
+.marketing-preview__bar--high {
+  height: 76%;
+}
+
+.marketing-preview__bar--steady {
+  height: 64%;
 }
 
 .marketing-feature-grid,
