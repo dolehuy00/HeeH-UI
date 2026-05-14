@@ -1,20 +1,29 @@
 import * as React from "react";
-import type { ButtonSkinProps } from "@heeh-ui/theme";
-import { useSkin } from "@heeh-ui/theme";
+import { cn } from "@heeh-ui/utils";
 
 export type ButtonProps = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className"> &
-  ButtonSkinProps;
+  {
+    className?: string;
+    loading?: boolean;
+    size?: "sm" | "md" | "lg";
+    variant?: "primary" | "secondary" | "danger" | "ghost" | "outline";
+  };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, type = "button", disabled, loading, children, ...props }, ref) => {
-    const skin = useSkin();
+  ({ className, variant = "primary", size = "md", type = "button", disabled, loading, children, ...props }, ref) => {
     const isDisabled = disabled || loading;
 
     return (
       <button
         ref={ref}
         type={type}
-        className={skin.button({ variant, size, disabled, loading, className })}
+        className={cn(
+          "heeh-button",
+          `heeh-button--${size}`,
+          `heeh-button--${variant}`,
+          (disabled || loading) && "heeh-button--disabled",
+          className
+        )}
         disabled={isDisabled}
         aria-busy={loading || undefined}
         {...props}

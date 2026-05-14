@@ -1,200 +1,111 @@
+"use client";
+
 import * as React from "react";
 
 export type ThemeMode = "light" | "dark" | "system";
-
-export type ButtonSkinProps = {
-  variant?: "primary" | "secondary" | "danger" | "ghost" | "outline";
-  size?: "sm" | "md" | "lg";
-  disabled?: boolean;
-  loading?: boolean;
-  className?: string;
-};
-
-export type ButtonSkinFn = (props: ButtonSkinProps) => string;
-
-export type SurfaceSkinProps = {
-  tone?: "default" | "muted" | "elevated";
-  className?: string;
-};
-
-export type SurfaceSkinFn = (props: SurfaceSkinProps) => string;
-
-export type CardSkinProps = {
-  variant?: "default" | "elevated" | "outline";
-  tone?: SurfaceSkinProps["tone"];
-  className?: string;
-};
-
-export type CardSkinFn = (props: CardSkinProps) => string;
-
-export type HeadingSkinProps = {
-  size?: "sm" | "md" | "lg" | "xl";
-  className?: string;
-};
-
-export type HeadingSkinFn = (props: HeadingSkinProps) => string;
-
-export type TextSkinProps = {
-  size?: "sm" | "md" | "lg";
-  tone?: "default" | "muted" | "danger";
-  className?: string;
-};
-
-export type TextSkinFn = (props: TextSkinProps) => string;
-
-export type InputSkinProps = {
-  size?: "sm" | "md" | "lg";
-  state?: "default" | "invalid";
-  disabled?: boolean;
-  className?: string;
-};
-
-export type InputSkinFn = (props: InputSkinProps) => string;
-
-export type SectionSkinProps = {
-  spacing?: "sm" | "md" | "lg" | "xl";
-  tone?: "default" | "muted" | "accent";
-  className?: string;
-};
-
-export type SectionSkinFn = (props: SectionSkinProps) => string;
-
-export type UISkin = {
-  button: ButtonSkinFn;
-  card: CardSkinFn;
-  surface: SurfaceSkinFn;
-  heading: HeadingSkinFn;
-  text: TextSkinFn;
-  input: InputSkinFn;
-  section: SectionSkinFn;
-};
+export type SkinName = "office" | "cartoon" | "minimal";
 
 export type ThemeProviderProps = {
   children: React.ReactNode;
+  defaultSkin?: SkinName;
   defaultTheme?: ThemeMode;
+  skin?: SkinName;
   storageKey?: string;
-  skin?: UISkin;
+  theme?: ThemeMode;
 };
+
+export type ResolvedTheme = "light" | "dark";
 
 type ThemeContextValue = {
+  /** The configured mode, including `"system"`. */
   theme: ThemeMode;
+  /** The concrete theme actually applied to the document (`"system"` resolved). */
+  resolvedTheme: ResolvedTheme;
   setTheme: (theme: ThemeMode) => void;
-  skin: UISkin;
-};
-
-function skinClass(...classes: Array<string | false | null | undefined>) {
-  return classes.filter(Boolean).join(" ");
-}
-
-export const defaultSkin: UISkin = {
-  button: ({
-    variant = "primary",
-    size = "md",
-    disabled,
-    loading,
-    className
-  }: ButtonSkinProps) =>
-    skinClass(
-      "heeh-button",
-      `heeh-button--${size}`,
-      "heeh-skin-office-button",
-      `heeh-skin-office-button--${variant}`,
-      (disabled || loading) && "heeh-button--disabled",
-      className
-    ),
-  card: ({ variant = "default", tone = "default", className }: CardSkinProps) =>
-    skinClass(
-      "heeh-card",
-      `heeh-card--${variant}`,
-      "heeh-skin-office-card",
-      `heeh-skin-office-card--${variant}`,
-      `heeh-surface--${tone}`,
-      className
-    ),
-  surface: ({ tone = "default", className }: SurfaceSkinProps) =>
-    skinClass(
-      "heeh-surface",
-      `heeh-surface--${tone}`,
-      "heeh-skin-office-surface",
-      `heeh-skin-office-surface--${tone}`,
-      className
-    ),
-  heading: ({ size = "md", className }: HeadingSkinProps) =>
-    skinClass(
-      "heeh-heading",
-      `heeh-heading--${size}`,
-      "heeh-skin-office-heading",
-      `heeh-skin-office-heading--${size}`,
-      className
-    ),
-  text: ({ size = "md", tone = "default", className }: TextSkinProps) =>
-    skinClass(
-      "heeh-text",
-      `heeh-text--${size}`,
-      `heeh-text--${tone}`,
-      "heeh-skin-office-text",
-      `heeh-skin-office-text--${tone}`,
-      className
-    ),
-  input: ({ size = "md", state = "default", disabled, className }: InputSkinProps) =>
-    skinClass(
-      "heeh-input",
-      `heeh-input--${size}`,
-      `heeh-input--${state}`,
-      "heeh-skin-office-input",
-      `heeh-skin-office-input--${state}`,
-      disabled && "heeh-input--disabled",
-      className
-    ),
-  section: ({ spacing = "md", tone = "default", className }: SectionSkinProps) =>
-    skinClass(
-      "heeh-section",
-      `heeh-section--${spacing}`,
-      `heeh-section--${tone}`,
-      "heeh-skin-office-section",
-      `heeh-skin-office-section--${tone}`,
-      className
-    )
 };
 
 const ThemeContext = React.createContext<ThemeContextValue | null>(null);
 
+function resolveTheme(theme: ThemeMode): ResolvedTheme {
+  if (theme !== "system") return theme;
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
 export function UIProvider({
   children,
+  defaultSkin = "office",
   defaultTheme = "system",
+  skin = defaultSkin,
   storageKey = "heeh-ui-theme",
-  skin = defaultSkin
+  theme: controlledTheme
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = React.useState<ThemeMode>(() => {
-    if (typeof window === "undefined") {
-      return defaultTheme;
-    }
+  // Always start from `defaultTheme` so the server render and the first client
+  // render produce identical markup. The persisted value is read after mount.
+  const [uncontrolledTheme, setUncontrolledTheme] = React.useState<ThemeMode>(defaultTheme);
 
-    return (window.localStorage.getItem(storageKey) as ThemeMode | null) ?? defaultTheme;
-  });
+  React.useEffect(() => {
+    if (controlledTheme !== undefined) return;
+
+    try {
+      const stored = window.localStorage.getItem(storageKey) as ThemeMode | null;
+
+      if (stored) setUncontrolledTheme(stored);
+    } catch {
+      // localStorage can be unavailable (private mode, disabled storage) — ignore.
+    }
+  }, [controlledTheme, storageKey]);
+
+  const theme = controlledTheme ?? uncontrolledTheme;
+
+  // Start from a deterministic value so server and first client render match;
+  // the real resolved value is computed in the effect below (client-only).
+  const [resolvedTheme, setResolvedTheme] = React.useState<ResolvedTheme>(
+    theme === "dark" ? "dark" : "light"
+  );
 
   React.useEffect(() => {
     const root = window.document.documentElement;
-    const resolvedTheme =
-      theme === "system"
-        ? window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light"
-        : theme;
+    const apply = () => {
+      const resolved = resolveTheme(theme);
 
-    root.dataset.theme = resolvedTheme;
+      setResolvedTheme(resolved);
+      root.dataset.theme = resolved;
+    };
+
+    apply();
+
+    if (theme !== "system") return;
+
+    // Keep `data-theme` in sync when the OS colour-scheme preference changes.
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+    media.addEventListener("change", apply);
+
+    return () => media.removeEventListener("change", apply);
   }, [theme]);
+
+  React.useEffect(() => {
+    window.document.documentElement.dataset.skin = skin;
+  }, [skin]);
 
   const setTheme = React.useCallback(
     (nextTheme: ThemeMode) => {
-      window.localStorage.setItem(storageKey, nextTheme);
-      setThemeState(nextTheme);
+      try {
+        window.localStorage.setItem(storageKey, nextTheme);
+      } catch {
+        // Persistence is best-effort — the in-memory state still updates below.
+      }
+
+      setUncontrolledTheme(nextTheme);
     },
     [storageKey]
   );
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, skin }}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
   );
 }
 
@@ -208,8 +119,4 @@ export function useTheme() {
   }
 
   return context;
-}
-
-export function useSkin() {
-  return React.useContext(ThemeContext)?.skin ?? defaultSkin;
 }

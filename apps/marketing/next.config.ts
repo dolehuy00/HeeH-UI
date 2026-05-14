@@ -7,7 +7,6 @@ const nextConfig: NextConfig = {
     "@heeh-ui/core",
     "@heeh-ui/data-display",
     "@heeh-ui/forms",
-    "@heeh-ui/skins",
     "@heeh-ui/styles",
     "@heeh-ui/theme",
     "@heeh-ui/tokens",

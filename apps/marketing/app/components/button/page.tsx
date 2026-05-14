@@ -1,5 +1,3 @@
-"use client";
-
 import { ComponentDoc, CodeBlock, DocSection } from "../../../components-gallery/ComponentLayout";
 import { PropsTable } from "../../../components-gallery/PropsTable";
 import {
@@ -26,7 +24,7 @@ const buttonProps = [
     name: "disabled",
     type: "boolean",
     defaultValue: "false",
-    notes: "Disables native click behavior and passes state to the skin."
+    notes: "Disables native click behavior and adds the disabled state class."
   },
   {
     name: "loading",
@@ -68,7 +66,7 @@ export default function ButtonPage() {
       </DocSection>
       <DocSection
         title="Skin behavior"
-        description="The core component only asks the active skin for classes. Office, cartoon, and minimal can change color, radius, shadow, and motion without changing Button props."
+        description="Button emits stable classes only. Office, cartoon, and minimal change color, radius, shadow, and motion through global data-skin CSS."
       />
     </ComponentDoc>
   );

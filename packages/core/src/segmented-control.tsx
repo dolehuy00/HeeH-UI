@@ -11,10 +11,22 @@ export function SegmentedControl({
   label,
   ...props
 }: SegmentedControlProps) {
+  const labelId = React.useId();
+
   return (
     <div className={cn("heeh-segmented-control", className)} {...props}>
-      {label ? <span className="heeh-segmented-control__label">{label}</span> : null}
-      <div className="heeh-segmented-control__items">{children}</div>
+      {label ? (
+        <span className="heeh-segmented-control__label" id={labelId}>
+          {label}
+        </span>
+      ) : null}
+      <div
+        className="heeh-segmented-control__items"
+        role="radiogroup"
+        aria-labelledby={label ? labelId : undefined}
+      >
+        {children}
+      </div>
     </div>
   );
 }
@@ -34,7 +46,8 @@ export const SegmentedControlItem = React.forwardRef<
   <button
     ref={ref}
     type={type}
-    aria-pressed={selected}
+    role="radio"
+    aria-checked={selected ?? false}
     data-selected={selected || undefined}
     className={cn(
       "heeh-segmented-control__item",

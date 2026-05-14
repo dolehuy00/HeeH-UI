@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -21,7 +21,6 @@
   "dependencies": {
     "@heeh-ui/core": "workspace:*",
     "@heeh-ui/forms": "workspace:*",
-    "@heeh-ui/theme": "workspace:*",
     "@heeh-ui/utils": "workspace:*",
     "react": "^19.2.6"
   },

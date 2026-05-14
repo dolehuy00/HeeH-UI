@@ -1,5 +1,3 @@
-"use client";
-
 import { Heading, Text } from "@heeh-ui/core";
 import { ComponentDoc, CodeBlock, DocSection } from "../../../components-gallery/ComponentLayout";
 import { PreviewBox } from "../../../components-gallery/PreviewBox";

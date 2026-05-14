@@ -2,10 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button, Card, Grid, Heading, Stack, Text } from "@heeh-ui/core";
 import { Input } from "@heeh-ui/forms";
 import { Section } from "@heeh-ui/components";
-import { cartoonSkin } from "@heeh-ui/skins/cartoon";
-import { minimalSkin } from "@heeh-ui/skins/minimal";
-import { officeSkin } from "@heeh-ui/skins/office";
-import { UIProvider, type UISkin } from "@heeh-ui/theme";
+import { UIProvider, type SkinName } from "@heeh-ui/theme";
 
 const meta = {
   title: "Skins/Contract Examples",
@@ -18,20 +15,20 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const examples: Array<{ name: string; skin: UISkin; description: string }> = [
+const examples: Array<{ name: string; skin: SkinName; description: string }> = [
   {
     name: "Office",
-    skin: officeSkin,
+    skin: "office",
     description: "Restrained enterprise baseline with subtle shadows and token colors."
   },
   {
     name: "Cartoon",
-    skin: cartoonSkin,
+    skin: "cartoon",
     description: "Chunkier borders, stronger radius, and expressive offset shadows."
   },
   {
     name: "Minimal",
-    skin: minimalSkin,
+    skin: "minimal",
     description: "Reduced decoration, sharp surfaces, and a quieter reading rhythm."
   }
 ];
@@ -51,7 +48,7 @@ function ContractPanel({ name, skin, description }: (typeof examples)[number]) {
               <Card variant="outline" className="docs-card--sm">
                 <Stack gap="xs">
                   <Heading as="h3" size="sm">Card + text</Heading>
-                  <Text tone="muted">This card is resolved through the active skin.</Text>
+                  <Text tone="muted">This card is styled by the active data-skin.</Text>
                 </Stack>
               </Card>
               <Card variant="outline" className="docs-card--sm">

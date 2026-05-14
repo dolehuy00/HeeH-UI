@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@heeh-ui/core";
 import { PreviewBox } from "../components-gallery/PreviewBox";
 import { VariantGrid } from "../components-gallery/VariantGrid";

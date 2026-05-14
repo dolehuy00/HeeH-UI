@@ -1,13 +1,19 @@
 import * as React from "react";
-import { useSkin, type CardSkinProps } from "@heeh-ui/theme";
+import { cn } from "@heeh-ui/utils";
 
 export type CardProps = React.HTMLAttributes<HTMLDivElement> & {
-  tone?: CardSkinProps["tone"];
-  variant?: CardSkinProps["variant"];
+  tone?: "default" | "muted" | "elevated";
+  variant?: "default" | "elevated" | "outline";
 };
 
-export function Card({ tone = "default", variant = "default", className, ...props }: CardProps) {
-  const skin = useSkin();
+export const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ tone = "default", variant = "default", className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("heeh-card", `heeh-card--${variant}`, `heeh-surface--${tone}`, className)}
+      {...props}
+    />
+  )
+);
 
-  return <div className={skin.card({ tone, variant, className })} {...props} />;
-}
+Card.displayName = "Card";

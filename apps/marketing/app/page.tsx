@@ -1,5 +1,3 @@
-"use client";
-
 import { GalleryShell } from "../components-gallery/GalleryShell";
 import { ComponentsOverview } from "../components-gallery/OverviewPage";
 

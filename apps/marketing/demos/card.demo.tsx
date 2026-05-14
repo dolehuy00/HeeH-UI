@@ -1,5 +1,3 @@
-"use client";
-
 import { Card, Heading, Stack, Surface, Text } from "@heeh-ui/core";
 import { PreviewBox } from "../components-gallery/PreviewBox";
 import { VariantGrid } from "../components-gallery/VariantGrid";

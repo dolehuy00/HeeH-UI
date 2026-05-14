@@ -47,9 +47,6 @@ importers:
       '@heeh-ui/patterns':
         specifier: workspace:*
         version: link:../../packages/patterns
-      '@heeh-ui/skins':
-        specifier: workspace:*
-        version: link:../../packages/skins
       '@heeh-ui/styles':
         specifier: workspace:*
         version: link:../../packages/styles
@@ -99,9 +96,6 @@ importers:
       '@heeh-ui/forms':
         specifier: workspace:*
         version: link:../../packages/forms
-      '@heeh-ui/skins':
-        specifier: workspace:*
-        version: link:../../packages/skins
       '@heeh-ui/styles':
         specifier: workspace:*
         version: link:../../packages/styles
@@ -145,9 +139,6 @@ importers:
       '@heeh-ui/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@heeh-ui/skins':
-        specifier: workspace:*
-        version: link:../../packages/skins
       '@heeh-ui/styles':
         specifier: workspace:*
         version: link:../../packages/styles
@@ -201,9 +192,6 @@ importers:
       '@heeh-ui/forms':
         specifier: workspace:*
         version: link:../forms
-      '@heeh-ui/theme':
-        specifier: workspace:*
-        version: link:../theme
       '@heeh-ui/utils':
         specifier: workspace:*
         version: link:../utils
@@ -220,12 +208,6 @@ importers:
 
   packages/core:
     dependencies:
-      '@heeh-ui/hooks':
-        specifier: workspace:*
-        version: link:../hooks
-      '@heeh-ui/theme':
-        specifier: workspace:*
-        version: link:../theme
       '@heeh-ui/utils':
         specifier: workspace:*
         version: link:../utils
@@ -258,9 +240,9 @@ importers:
 
   packages/forms:
     dependencies:
-      '@heeh-ui/theme':
+      '@heeh-ui/hooks':
         specifier: workspace:*
-        version: link:../theme
+        version: link:../hooks
       '@heeh-ui/utils':
         specifier: workspace:*
         version: link:../utils
@@ -334,9 +316,6 @@ importers:
 
   packages/skins:
     dependencies:
-      '@heeh-ui/styles':
-        specifier: workspace:*
-        version: link:../styles
       '@heeh-ui/theme':
         specifier: workspace:*
         version: link:../theme
@@ -346,10 +325,6 @@ importers:
         version: 6.0.3
 
   packages/styles:
-    dependencies:
-      '@heeh-ui/utils':
-        specifier: workspace:*
-        version: link:../utils
     devDependencies:
       typescript:
         specifier: ^6.0.3

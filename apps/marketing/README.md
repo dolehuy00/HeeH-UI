@@ -108,15 +108,15 @@ apps/marketing/out
 - `@heeh-ui/forms`: Input and nearby form controls.
 - `@heeh-ui/components`: Section and Dialog/Modal composition.
 - `@heeh-ui/data-display`: Table and Tag density checks.
-- `@heeh-ui/theme`: UIProvider, useTheme, and active skin injection.
-- `@heeh-ui/skins/office`, `@heeh-ui/skins/cartoon`, and `@heeh-ui/skins/minimal`: explicit skin imports.
+- `@heeh-ui/theme`: UIProvider and useTheme for the gallery-level theme switcher.
+- `data-skin="office|cartoon|minimal"`: app-level skin selection through global CSS.
 
 ## Current Contract Gaps
 
 This gallery intentionally makes unresolved v1 gaps visible:
 
 - Card and Surface need richer anatomy, padding, and interactive state contracts.
-- Select, Textarea, Checkbox, Switch, and Slider are still mostly shared-style controls, while Input is skin-aware.
-- Modal sizing, overlay treatment, and dialog anatomy are not yet fully skin-contract driven.
+- Select, Textarea, Checkbox, Switch, and Slider still need stronger skin-specific polish.
+- Modal sizing, overlay treatment, and dialog anatomy still need stronger skin-specific polish.
 - Table density, sorting, selection, loading, and empty states are not modeled yet.
 - Form layout has useful primitives, but field state semantics need to grow beyond invalid.

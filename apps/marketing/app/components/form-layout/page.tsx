@@ -1,5 +1,3 @@
-"use client";
-
 import { Button, Grid } from "@heeh-ui/core";
 import {
   Checkbox,

@@ -1,5 +1,3 @@
-"use client";
-
 import { ComponentDoc, CodeBlock, DocSection } from "../../../components-gallery/ComponentLayout";
 import { PropsTable } from "../../../components-gallery/PropsTable";
 import {
@@ -14,7 +12,7 @@ const inputProps = [
     name: "size",
     type: '"sm" | "md" | "lg"',
     defaultValue: '"md"',
-    notes: "Maps to the active skin input sizing."
+    notes: "Maps to stable input sizing classes."
   },
   {
     name: "state",
@@ -26,7 +24,7 @@ const inputProps = [
     name: "disabled",
     type: "boolean",
     defaultValue: "false",
-    notes: "Disables the native input and forwards the disabled state to the skin."
+    notes: "Disables the native input and adds the disabled state class."
   }
 ];
 
@@ -34,7 +32,7 @@ export default function InputPage() {
   return (
     <ComponentDoc
       title="Input"
-      description="Skin-aware native input used for text, date, time, file, and related single-value controls."
+      description="Native input used for text, date, time, file, and related single-value controls."
     >
       <DocSection title="Overview">
         <InputDefaultDemo />
@@ -65,7 +63,7 @@ export default function InputPage() {
       </DocSection>
       <DocSection
         title="Skin behavior"
-        description="Input is wired into the skin contract, while Select, Textarea, Checkbox, Switch, and Slider still rely on shared styles. That gap is now visible in one place."
+        description="Input emits stable classes. The active data-skin controls radius, borders, and surface treatment through CSS."
       />
     </ComponentDoc>
   );

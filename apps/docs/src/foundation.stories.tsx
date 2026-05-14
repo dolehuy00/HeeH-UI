@@ -44,7 +44,7 @@ export const Composition: Story = {
               <Stack gap="xs">
                 <Label>Actions</Label>
                 <Text size="sm" tone="muted">
-                  Button consumes only the active skin.
+                  Button emits stable classes for the active data-skin.
                 </Text>
               </Stack>
               <Flex gap="sm" wrap>

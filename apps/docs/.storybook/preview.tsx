@@ -2,16 +2,13 @@ import "@heeh-ui/tokens/css";
 import "@heeh-ui/styles/css";
 import "./docs.css";
 import type { Preview } from "@storybook/react-vite";
-import { cartoonSkin } from "@heeh-ui/skins/cartoon";
-import { minimalSkin } from "@heeh-ui/skins/minimal";
-import { officeSkin } from "@heeh-ui/skins/office";
-import { UIProvider, type UISkin } from "@heeh-ui/theme";
+import { UIProvider, type SkinName } from "@heeh-ui/theme";
 
-const skins: Record<string, UISkin> = {
-  office: officeSkin,
-  cartoon: cartoonSkin,
-  minimal: minimalSkin
-};
+const skins: SkinName[] = ["office", "cartoon", "minimal"];
+
+function resolveSkin(value: unknown): SkinName {
+  return skins.includes(value as SkinName) ? (value as SkinName) : "office";
+}
 
 const preview: Preview = {
   globalTypes: {
@@ -28,7 +25,7 @@ const preview: Preview = {
   },
   decorators: [
     (Story, context) => (
-      <UIProvider skin={skins[String(context.globals.skin)] ?? officeSkin}>
+      <UIProvider skin={resolveSkin(context.globals.skin)}>
         <Story />
       </UIProvider>
     )

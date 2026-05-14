@@ -6,9 +6,10 @@ export type IconProps = React.HTMLAttributes<HTMLSpanElement> & {
   label?: string;
 };
 
-export function Icon({ children, label, className, ...props }: IconProps) {
-  return (
+export const Icon = React.forwardRef<HTMLSpanElement, IconProps>(
+  ({ children, label, className, ...props }, ref) => (
     <span
+      ref={ref}
       aria-hidden={label ? undefined : true}
       aria-label={label}
       role={label ? "img" : undefined}
@@ -17,5 +18,7 @@ export function Icon({ children, label, className, ...props }: IconProps) {
     >
       {children}
     </span>
-  );
-}
+  )
+);
+
+Icon.displayName = "Icon";

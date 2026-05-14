@@ -1,30 +1,4 @@
-import type { UISkin } from "../types";
-import { officeButtonSkin } from "./button.skin";
-import {
-  officeCardSkin,
-  officeHeadingSkin,
-  officeInputSkin,
-  officeSectionSkin,
-  officeSurfaceSkin,
-  officeTextSkin
-} from "./foundation.skin";
+import type { SkinName } from "../types";
 
-export const officeSkin: UISkin = {
-  button: officeButtonSkin,
-  card: officeCardSkin,
-  surface: officeSurfaceSkin,
-  heading: officeHeadingSkin,
-  text: officeTextSkin,
-  input: officeInputSkin,
-  section: officeSectionSkin
-};
-
-export { officeButtonSkin };
-export {
-  officeCardSkin,
-  officeHeadingSkin,
-  officeInputSkin,
-  officeSectionSkin,
-  officeSurfaceSkin,
-  officeTextSkin
-};
+export const officeSkinName = "office" satisfies SkinName;
+export const officeSkin = officeSkinName;

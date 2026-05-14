@@ -39,16 +39,16 @@ tokens/styles
   design primitives and global CSS entrypoints
 
 theme
-  provider, active skin injection, useSkin()
+  provider helpers for app-level theme and skin attributes
 
 skins
-  complete visual presets such as office, minimal, cartoon
+  typed skin names such as office, minimal, cartoon
 
 core
   headless primitives: behavior, accessibility, focus, keyboard, refs
 
 components
-  public styled components that compose core behavior with the active skin
+  public components that emit stable classes and consume global CSS
 
 forms / data-display / charts / patterns
   higher-level adapters and product patterns built on the lower layers
@@ -77,8 +77,8 @@ Core must not contain:
 
 ### Skins
 
-`packages/skins` contains complete visual presets. A skin owns the component
-appearance for a visual identity.
+`packages/skins` exposes built-in skin names. A skin owns the component
+appearance for a visual identity through global CSS variables and selectors.
 
 Current skin folders include:
 
@@ -89,31 +89,34 @@ packages/skins/src/
   cartoon/
 ```
 
-Skins may use tokens and shared style utilities, but they should expose scoped
-skin functions instead of forcing components to import every visual preset.
+Skins are selected at the app/document boundary with `data-skin`, for example
+`<html data-skin="office">`.
 
 ### Theme Provider
 
-`packages/theme` owns skin injection. Components should consume the active skin
-through the theme layer.
+`packages/theme` owns small app-level helpers for theme and skin attributes.
+Core components do not consume skin context.
 
 ```tsx
-const skin = useSkin();
-
-return (
-  <button className={skin.button({ variant, size, disabled, className })}>
-    {children}
-  </button>
-);
+<html data-skin="office">
 ```
 
-Only the active skin should execute during render. Do not calculate all skin
-outputs and then pick one.
+CSS owns the skin switch:
+
+```css
+[data-skin="office"] {
+  --heeh-button-radius: var(--heeh-radius-md);
+}
+
+.heeh-button {
+  border-radius: var(--heeh-button-radius);
+}
+```
 
 ### Components
 
 `packages/components` is the public styled layer. Components should compose
-core primitives, call the active skin, and expose variant-based APIs.
+core primitives, emit stable classes, and expose variant-based APIs.
 
 Prefer:
 
@@ -199,9 +202,9 @@ Avoid importing business-ready components into `core`, `theme`, `tokens`, `hooks
 
 Dependency rules:
 
-- `core` can use low-level utilities, hooks, and theme contracts, but not skins.
-- `components` can use `core` and `theme` to bind behavior to the active skin.
-- `skins` can use tokens/styles/theme types, but components should not import all skins in a render path.
+- `core` can use low-level utilities and focused hooks, but not skins or theme context.
+- `components` can use `core` and stable CSS classes.
+- `skins` exposes app-level skin names; visual rules live in styles/tokens.
 - `patterns` can compose public components into larger product flows.
 - Apps may import any package needed for demos, docs, and integration testing.
 
@@ -221,7 +224,7 @@ Before adding or changing a component, check:
 - Does the API use variants instead of many booleans?
 - Is behavior separated from skin-specific styling?
 - Are props stable enough for repeated use in lists/grids?
-- Does the render path execute only the active skin?
+- Does the component avoid runtime skin resolution in render?
 - Is the component free of business/domain language?
 - Are large collections virtualized or prepared for virtualization?
 

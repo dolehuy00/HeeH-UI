@@ -6,8 +6,10 @@ export type ImageProps = React.ImgHTMLAttributes<HTMLImageElement> & {
 };
 
 export const Image = React.forwardRef<HTMLImageElement, ImageProps>(
-  ({ fit = "cover", className, ...props }, ref) => (
-    <img ref={ref} className={cn("heeh-image", `heeh-image--${fit}`, className)} {...props} />
+  // Default `alt` to an empty string so a missing prop renders a valid
+  // decorative image rather than an accessibility violation.
+  ({ fit = "cover", alt = "", className, ...props }, ref) => (
+    <img ref={ref} alt={alt} className={cn("heeh-image", `heeh-image--${fit}`, className)} {...props} />
   )
 );
 

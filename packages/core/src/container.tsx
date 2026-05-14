@@ -5,6 +5,10 @@ export type ContainerProps = React.HTMLAttributes<HTMLDivElement> & {
   size?: "sm" | "md" | "lg" | "xl" | "full";
 };
 
-export function Container({ size = "lg", className, ...props }: ContainerProps) {
-  return <div className={cn("heeh-container", `heeh-container--${size}`, className)} {...props} />;
-}
+export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
+  ({ size = "lg", className, ...props }, ref) => (
+    <div ref={ref} className={cn("heeh-container", `heeh-container--${size}`, className)} {...props} />
+  )
+);
+
+Container.displayName = "Container";

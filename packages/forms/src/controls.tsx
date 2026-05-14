@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useSkin, type InputSkinProps } from "@heeh-ui/theme";
+import { useControllableState } from "@heeh-ui/hooks";
 import { cn } from "@heeh-ui/utils";
 
 type NativeInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "className" | "size">;
@@ -8,18 +8,28 @@ type ClassNameProp = {
   className?: string;
 };
 
-export type InputProps = NativeInputProps & InputSkinProps;
+type InputStyleProps = {
+  size?: "sm" | "md" | "lg";
+  state?: "default" | "invalid";
+};
+
+export type InputProps = NativeInputProps & ClassNameProp & InputStyleProps;
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, size, state, disabled, "aria-invalid": ariaInvalid, ...props }, ref) => {
-    const skin = useSkin();
     const isInvalid = ariaInvalid === true || ariaInvalid === "true";
     const resolvedState = state ?? (isInvalid ? "invalid" : "default");
 
     return (
       <input
         ref={ref}
-        className={skin.input({ size, state: resolvedState, disabled, className })}
+        className={cn(
+          "heeh-input",
+          `heeh-input--${size ?? "md"}`,
+          `heeh-input--${resolvedState}`,
+          disabled && "heeh-input--disabled",
+          className
+        )}
         disabled={disabled}
         aria-invalid={ariaInvalid}
         {...props}
@@ -176,8 +186,11 @@ export function RangeSlider({
   className,
   ...props
 }: RangeSliderProps) {
-  const [internalValue, setInternalValue] = React.useState(defaultValue);
-  const currentValue = value ?? internalValue;
+  const [currentValue, setValue] = useControllableState<[number, number]>({
+    value,
+    defaultValue,
+    onChange
+  });
 
   const updateValue = (index: 0 | 1, next: number) => {
     const nextValue: [number, number] =
@@ -185,8 +198,7 @@ export function RangeSlider({
         ? [Math.min(next, currentValue[1]), currentValue[1]]
         : [currentValue[0], Math.max(next, currentValue[0])];
 
-    setInternalValue(nextValue);
-    onChange?.(nextValue);
+    setValue(nextValue);
   };
 
   return (
@@ -237,20 +249,34 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
 
 FileUpload.displayName = "FileUpload";
 
-export type OtpInputProps = Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> & {
+export type OtpInputProps = Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "onChange" | "defaultValue"
+> & {
   length?: number;
   value?: string;
+  defaultValue?: string;
   onChange?: (value: string) => void;
 };
 
-export function OtpInput({ length = 6, value = "", onChange, className, ...props }: OtpInputProps) {
+export function OtpInput({
+  length = 6,
+  value,
+  defaultValue = "",
+  onChange,
+  className,
+  ...props
+}: OtpInputProps) {
+  const [currentValue, setValue] = useControllableState({ value, defaultValue, onChange });
   const inputsRef = React.useRef<Array<HTMLInputElement | null>>([]);
-  const chars = value.padEnd(length).slice(0, length).split("");
+  // Fixed-length slot view; empty slots are "" (not space-padded) so a
+  // legitimately typed space is never silently trimmed away.
+  const chars = Array.from({ length }, (_, index) => currentValue[index] ?? "");
 
   const updateChar = (index: number, nextChar: string) => {
     const nextValue = [...chars];
     nextValue[index] = nextChar.slice(-1);
-    onChange?.(nextValue.join("").trim());
+    setValue(nextValue.join(""));
 
     if (nextChar && index < length - 1) {
       inputsRef.current[index + 1]?.focus();
@@ -269,7 +295,7 @@ export function OtpInput({ length = 6, value = "", onChange, className, ...props
           className="heeh-otp__input"
           inputMode="numeric"
           maxLength={1}
-          value={chars[index]?.trim() ?? ""}
+          value={chars[index]}
           onChange={(event) => updateChar(index, event.currentTarget.value)}
         />
       ))}

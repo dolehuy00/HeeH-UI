@@ -10,18 +10,9 @@ import {
   SegmentedControlItem,
   Text
 } from "@heeh-ui/core";
-import { cartoonSkin } from "@heeh-ui/skins/cartoon";
-import { minimalSkin } from "@heeh-ui/skins/minimal";
-import { officeSkin } from "@heeh-ui/skins/office";
-import { UIProvider, useTheme, type ThemeMode, type UISkin } from "@heeh-ui/theme";
+import { UIProvider, useTheme, type SkinName, type ThemeMode } from "@heeh-ui/theme";
 
-const skins: Record<string, UISkin> = {
-  office: officeSkin,
-  cartoon: cartoonSkin,
-  minimal: minimalSkin
-};
-
-const skinNames = Object.keys(skins);
+const skinNames: SkinName[] = ["office", "cartoon", "minimal"];
 const themeModes: ThemeMode[] = ["light", "dark", "system"];
 const densityModes = ["comfortable", "compact"] as const;
 
@@ -39,12 +30,11 @@ const navItems = [
 type DensityMode = (typeof densityModes)[number];
 
 export function GalleryShell({ children }: { children: React.ReactNode }) {
-  const [skinName, setSkinName] = React.useState("office");
+  const [skinName, setSkinName] = React.useState<SkinName>("office");
   const [density, setDensity] = React.useState<DensityMode>("comfortable");
-  const activeSkin = skins[skinName] ?? officeSkin;
 
   return (
-    <UIProvider skin={activeSkin} storageKey="heeh-ui-gallery-theme">
+    <UIProvider skin={skinName} storageKey="heeh-ui-gallery-theme">
       <GalleryChrome
         density={density}
         onDensityChange={setDensity}
@@ -67,8 +57,8 @@ function GalleryChrome({
   children: React.ReactNode;
   density: DensityMode;
   onDensityChange: (density: DensityMode) => void;
-  onSkinChange: (skinName: string) => void;
-  skinName: string;
+  onSkinChange: (skinName: SkinName) => void;
+  skinName: SkinName;
 }) {
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();

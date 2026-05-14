@@ -1,5 +1,3 @@
-"use client";
-
 import { ComponentDoc, CodeBlock, DocSection } from "../../../components-gallery/ComponentLayout";
 import { PropsTable } from "../../../components-gallery/PropsTable";
 import {

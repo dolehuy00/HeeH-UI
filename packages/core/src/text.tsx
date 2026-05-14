@@ -1,20 +1,24 @@
 import * as React from "react";
-import { useSkin, type TextSkinProps } from "@heeh-ui/theme";
+import { cn } from "@heeh-ui/utils";
 
-export type TextProps = React.HTMLAttributes<HTMLParagraphElement> & {
+export type TextProps = React.HTMLAttributes<HTMLElement> & {
   as?: "p" | "span" | "div";
-  size?: TextSkinProps["size"];
-  tone?: TextSkinProps["tone"];
+  size?: "sm" | "md" | "lg";
+  tone?: "default" | "muted" | "danger";
 };
 
-export function Text({
-  as: Component = "p",
-  size = "md",
-  tone = "default",
-  className,
-  ...props
-}: TextProps) {
-  const skin = useSkin();
+export const Text = React.forwardRef<HTMLElement, TextProps>(
+  ({ as = "p", size = "md", tone = "default", className, ...props }, ref) => {
+    const Component = as as React.ElementType;
 
-  return <Component className={skin.text({ size, tone, className })} {...props} />;
-}
+    return (
+      <Component
+        ref={ref}
+        className={cn("heeh-text", `heeh-text--${size}`, `heeh-text--${tone}`, className)}
+        {...props}
+      />
+    );
+  }
+);
+
+Text.displayName = "Text";

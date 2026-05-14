@@ -6,12 +6,21 @@ export type BoxProps<TElement extends React.ElementType = "div"> = {
   className?: string;
 } & Omit<React.ComponentPropsWithoutRef<TElement>, "as" | "className">;
 
-export function Box<TElement extends React.ElementType = "div">({
-  as,
-  className,
-  ...props
-}: BoxProps<TElement>) {
-  const Component = as ?? "div";
+type BoxComponent = <TElement extends React.ElementType = "div">(
+  props: BoxProps<TElement> & {
+    ref?: React.ComponentPropsWithRef<TElement>["ref"];
+  }
+) => React.ReactElement | null;
 
-  return <Component className={cn("heeh-box", className)} {...props} />;
-}
+// forwardRef erases the polymorphic generic, so the implementation is typed
+// against the `"div"` default and the public `Box` is cast back to the
+// generic signature below.
+const BoxImpl = React.forwardRef<HTMLElement, BoxProps>(({ as, className, ...props }, ref) => {
+  const Component = (as ?? "div") as React.ElementType;
+
+  return <Component ref={ref} className={cn("heeh-box", className)} {...props} />;
+});
+
+BoxImpl.displayName = "Box";
+
+export const Box = BoxImpl as unknown as BoxComponent;

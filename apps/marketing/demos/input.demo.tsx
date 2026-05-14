@@ -1,5 +1,3 @@
-"use client";
-
 import { Button, Stack } from "@heeh-ui/core";
 import {
   Checkbox,

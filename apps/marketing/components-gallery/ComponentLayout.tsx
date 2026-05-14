@@ -1,5 +1,3 @@
-"use client";
-
 import type { ReactNode } from "react";
 import { Heading, Stack, Text } from "@heeh-ui/core";
 

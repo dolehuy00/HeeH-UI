@@ -1,104 +1,68 @@
-# HeeH UI Skin Contract
+# HeeH UI Skins
 
-This package contains visual presets for HeeH UI. Skins are presentation-only objects that satisfy the `UISkin` contract from `@heeh-ui/theme`.
+This package exposes the built-in skin names for HeeH UI.
 
-Core components must not import this package. Apps, docs, and composition layers choose a skin and pass it into `UIProvider`.
+Skins are app-level visual presets, not runtime class resolver objects. Components render stable classes such as `heeh-button`, `heeh-button--primary`, and `heeh-card--elevated`. The active skin is selected globally with:
 
-## Contract v1
-
-The current v1 contract covers the minimum surface needed to build a simple marketing app:
-
-```ts
-export type UISkin = {
-  button: ButtonSkinFn;
-  card: CardSkinFn;
-  surface: SurfaceSkinFn;
-  heading: HeadingSkinFn;
-  text: TextSkinFn;
-  input: InputSkinFn;
-  section: SectionSkinFn;
-};
+```html
+<html data-skin="office">
 ```
 
-Each function receives variant-style props and returns a class string. Skin functions should be cheap, deterministic, and should not allocate or compute styles for inactive skins during render.
+The shared stylesheet then applies skin-specific CSS variables and selectors:
 
-## Import Paths
+```css
+[data-skin="cartoon"] {
+  --heeh-button-radius: var(--heeh-radius-2xl);
+}
 
-Prefer scoped skin imports when an app only needs one preset:
+.heeh-button {
+  border-radius: var(--heeh-button-radius);
+}
+```
+
+## Exports
 
 ```ts
 import { officeSkin } from "@heeh-ui/skins/office";
+import { cartoonSkin } from "@heeh-ui/skins/cartoon";
+import { minimalSkin } from "@heeh-ui/skins/minimal";
 ```
 
-Use the root barrel only for tooling or demos that intentionally need all skins:
+Each export is a typed skin name:
 
 ```ts
-import { officeSkin, cartoonSkin, minimalSkin } from "@heeh-ui/skins";
+officeSkin; // "office"
+cartoonSkin; // "cartoon"
+minimalSkin; // "minimal"
 ```
-
-The current apps use subpath imports for explicit bundle boundaries:
-
-- `@heeh-ui/skins/office`
-- `@heeh-ui/skins/cartoon`
-- `@heeh-ui/skins/minimal`
 
 ## Usage
 
 ```tsx
 import { Button } from "@heeh-ui/core";
-import { officeSkin } from "@heeh-ui/skins/office";
 import { UIProvider } from "@heeh-ui/theme";
 
 export function App() {
   return (
-    <UIProvider skin={officeSkin}>
+    <UIProvider skin="office">
       <Button variant="primary">Start</Button>
     </UIProvider>
   );
 }
 ```
 
-## Skin Examples
+For SSR-first apps, set the initial skin on the server-rendered document:
 
-### Office
-
-Office is the default enterprise-style preset. It favors restrained radius, subtle shadows, and token-driven semantic colors.
-
-```ts
-import { officeSkin } from "@heeh-ui/skins/office";
+```tsx
+<html data-skin="office">
 ```
 
-### Cartoon
-
-Cartoon emphasizes heavier borders, larger radius, and strong offset shadows. It is useful for stress-testing whether the contract supports a visibly different visual language.
-
-```ts
-import { cartoonSkin } from "@heeh-ui/skins/cartoon";
-```
-
-### Minimal
-
-Minimal removes most decoration and pushes toward flat surfaces, sharp edges, and low visual weight.
-
-```ts
-import { minimalSkin } from "@heeh-ui/skins/minimal";
-```
+`UIProvider` is only needed when an app wants a client-side skin switcher.
 
 ## Rules
 
-- Do not import skins from `@heeh-ui/core`.
-- Do not import all skins in reusable components.
-- Do not switch skin presets inside component render paths.
-- Do not add domain-specific props to skin functions.
-- Prefer variants and tones over boolean prop growth.
-- Keep visual decisions in skin/style layers and behavior in core.
-
-## Known Gaps
-
-The marketing app shows that contract v1 works, but v2 should likely add:
-
-- card anatomy and density
-- responsive layout contract for grids/sections
-- textarea/select skin coverage
-- section alignment and width semantics
-- stronger token ownership for marketing-specific backgrounds
+- Core components must not import skins or read skin context.
+- Skins are selected at the app/document boundary with `data-skin`.
+- Component variants stay stable across skins.
+- Visual identity belongs in CSS variables and global skin selectors.
+- Keep behavior in components and visual decisions in styles.

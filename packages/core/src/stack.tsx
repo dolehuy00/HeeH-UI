@@ -6,29 +6,19 @@ export type StackProps = React.HTMLAttributes<HTMLDivElement> & {
   gap?: "xs" | "sm" | "md" | "lg" | "xl";
 };
 
-const gapClass = {
-  xs: "heeh-stack--gap-xs",
-  sm: "heeh-stack--gap-sm",
-  md: "heeh-stack--gap-md",
-  lg: "heeh-stack--gap-lg",
-  xl: "heeh-stack--gap-xl"
-};
-
-export function Stack({
-  direction = "column",
-  gap = "md",
-  className,
-  ...props
-}: StackProps) {
-  return (
+export const Stack = React.forwardRef<HTMLDivElement, StackProps>(
+  ({ direction = "column", gap = "md", className, ...props }, ref) => (
     <div
+      ref={ref}
       className={cn(
         "heeh-stack",
         direction === "row" ? "heeh-stack--row" : "heeh-stack--column",
-        gapClass[gap],
+        `heeh-stack--gap-${gap}`,
         className
       )}
       {...props}
     />
-  );
-}
+  )
+);
+
+Stack.displayName = "Stack";

@@ -1,5 +1,3 @@
-"use client";
-
 import { Table, Tag, type DataColumn } from "@heeh-ui/data-display";
 import { ComponentDoc, CodeBlock, DocSection } from "../../../components-gallery/ComponentLayout";
 import { PreviewBox } from "../../../components-gallery/PreviewBox";

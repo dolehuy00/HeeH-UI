@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Button, Card, Grid, Heading, Stack, Surface, Text } from "@heeh-ui/core";
 import { Input } from "@heeh-ui/forms";

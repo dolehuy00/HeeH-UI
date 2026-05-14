@@ -5,22 +5,15 @@ import "@heeh-ui/styles/css";
 import "./playground.css";
 import { Button, Heading, Stack, Text } from "@heeh-ui/core";
 import { Card } from "@heeh-ui/components";
-import { cartoonSkin } from "@heeh-ui/skins/cartoon";
-import { minimalSkin } from "@heeh-ui/skins/minimal";
-import { officeSkin } from "@heeh-ui/skins/office";
-import { UIProvider, useTheme, type UISkin } from "@heeh-ui/theme";
+import { UIProvider, useTheme, type SkinName } from "@heeh-ui/theme";
 
-const skins: Record<string, UISkin> = {
-  office: officeSkin,
-  cartoon: cartoonSkin,
-  minimal: minimalSkin
-};
+const skins: SkinName[] = ["office", "cartoon", "minimal"];
 
 function App() {
-  const [skinName, setSkinName] = React.useState("office");
+  const [skinName, setSkinName] = React.useState<SkinName>("office");
 
   return (
-    <UIProvider skin={skins[skinName] ?? officeSkin}>
+    <UIProvider skin={skinName}>
       <Playground skinName={skinName} setSkinName={setSkinName} />
     </UIProvider>
   );
@@ -30,8 +23,8 @@ function Playground({
   skinName,
   setSkinName
 }: {
-  skinName: string;
-  setSkinName: React.Dispatch<React.SetStateAction<string>>;
+  skinName: SkinName;
+  setSkinName: React.Dispatch<React.SetStateAction<SkinName>>;
 }) {
   const { theme, setTheme } = useTheme();
 
@@ -47,7 +40,7 @@ function Playground({
 
         <Card title="Skin system" description={`Current skin: ${skinName}`}>
           <Stack direction="row" gap="sm">
-            {Object.keys(skins).map((name) => (
+            {skins.map((name) => (
               <Button
                 key={name}
                 variant={skinName === name ? "primary" : "outline"}

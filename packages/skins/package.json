@@ -31,7 +31,6 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@heeh-ui/styles": "workspace:*",
     "@heeh-ui/theme": "workspace:*"
   },
   "devDependencies": {

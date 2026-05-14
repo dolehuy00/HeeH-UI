@@ -9,17 +9,10 @@ export type FlexProps = React.HTMLAttributes<HTMLDivElement> & {
   wrap?: boolean;
 };
 
-export function Flex({
-  align = "stretch",
-  direction = "row",
-  gap = "md",
-  justify = "start",
-  wrap,
-  className,
-  ...props
-}: FlexProps) {
-  return (
+export const Flex = React.forwardRef<HTMLDivElement, FlexProps>(
+  ({ align = "stretch", direction = "row", gap = "md", justify = "start", wrap, className, ...props }, ref) => (
     <div
+      ref={ref}
       className={cn(
         "heeh-flex",
         `heeh-flex--${direction}`,
@@ -31,5 +24,7 @@ export function Flex({
       )}
       {...props}
     />
-  );
-}
+  )
+);
+
+Flex.displayName = "Flex";
