@@ -1,30 +1,8 @@
 "use client";
 
 import * as React from "react";
-
-export type ThemeMode = "light" | "dark" | "system";
-export type SkinName = "office" | "cartoon" | "minimal";
-
-export type ThemeProviderProps = {
-  children: React.ReactNode;
-  defaultSkin?: SkinName;
-  defaultTheme?: ThemeMode;
-  skin?: SkinName;
-  storageKey?: string;
-  theme?: ThemeMode;
-};
-
-export type ResolvedTheme = "light" | "dark";
-
-type ThemeContextValue = {
-  /** The configured mode, including `"system"`. */
-  theme: ThemeMode;
-  /** The concrete theme actually applied to the document (`"system"` resolved). */
-  resolvedTheme: ResolvedTheme;
-  setTheme: (theme: ThemeMode) => void;
-};
-
-const ThemeContext = React.createContext<ThemeContextValue | null>(null);
+import { ThemeContext } from "./theme-context";
+import type { ResolvedTheme, SkinName, ThemeMode, ThemeProviderProps } from "./types";
 
 function resolveTheme(theme: ThemeMode): ResolvedTheme {
   if (theme !== "system") return theme;
@@ -36,7 +14,7 @@ export function UIProvider({
   children,
   defaultSkin = "office",
   defaultTheme = "system",
-  skin = defaultSkin,
+  skin: controlledSkin,
   storageKey = "heeh-ui-theme",
   theme: controlledTheme
 }: ThemeProviderProps) {
@@ -57,6 +35,8 @@ export function UIProvider({
   }, [controlledTheme, storageKey]);
 
   const theme = controlledTheme ?? uncontrolledTheme;
+  const [uncontrolledSkin, setUncontrolledSkin] = React.useState<SkinName>(defaultSkin);
+  const skin = controlledSkin ?? uncontrolledSkin;
 
   // Start from a deterministic value so server and first client render match;
   // the real resolved value is computed in the effect below (client-only).
@@ -102,21 +82,15 @@ export function UIProvider({
     [storageKey]
   );
 
+  const setSkin = React.useCallback((nextSkin: SkinName) => {
+    setUncontrolledSkin(nextSkin);
+  }, []);
+
   return (
-    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, skin, setSkin }}>
       {children}
     </ThemeContext.Provider>
   );
 }
 
 export const ThemeProvider = UIProvider;
-
-export function useTheme() {
-  const context = React.useContext(ThemeContext);
-
-  if (!context) {
-    throw new Error("useTheme must be used inside ThemeProvider.");
-  }
-
-  return context;
-}
