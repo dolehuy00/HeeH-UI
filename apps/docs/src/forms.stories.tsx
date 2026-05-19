@@ -2,7 +2,6 @@ import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button, Card, Grid, Stack } from "@heeh-ui/core";
 import {
-  Autocomplete,
   Checkbox,
   ColorPicker,
   DatePicker,
@@ -13,15 +12,14 @@ import {
   FormMessage,
   FormSection,
   Input,
-  OtpInput,
   Radio,
-  RangeSlider,
   Select,
   Slider,
   Switch,
   Textarea,
   TimePicker
 } from "@heeh-ui/forms";
+import { Autocomplete, OtpInput, RangeSlider } from "@heeh-ui/forms/client";
 
 const options = [
   { label: "Office", value: "office" },

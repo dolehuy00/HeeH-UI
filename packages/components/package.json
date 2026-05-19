@@ -10,6 +10,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.js"
     }
   },
   "scripts": {
@@ -21,6 +25,7 @@
   "dependencies": {
     "@heeh-ui/core": "workspace:*",
     "@heeh-ui/forms": "workspace:*",
+    "@heeh-ui/hooks": "workspace:*",
     "@heeh-ui/utils": "workspace:*",
     "react": "^19.2.6"
   },

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Button, Stack, Text } from "@heeh-ui/core";
-import { Dialog } from "@heeh-ui/components";
+import { Dialog } from "@heeh-ui/components/client";
 import { PreviewBox } from "../components-gallery/PreviewBox";
 
 export function ModalInteractionDemo() {

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, type ButtonProps } from "./button";
+import { Button, type ButtonProps } from "./button.js";
 
 export type IconButtonProps = Omit<ButtonProps, "children"> & {
   label: string;

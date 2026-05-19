@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Button, Card, Grid, Heading, Stack, Text } from "@heeh-ui/core";
 import { Input } from "@heeh-ui/forms";
 import { Section } from "@heeh-ui/components";
-import { UIProvider, type SkinName } from "@heeh-ui/theme";
+import type { SkinName } from "@heeh-ui/theme";
+import { UIProvider } from "@heeh-ui/theme/client";
 
 const meta = {
   title: "Skins/Contract Examples",

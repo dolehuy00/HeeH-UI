@@ -1,4 +1,4 @@
-export type { SkinName } from "./types";
-export { cartoonSkin, cartoonSkinName } from "./cartoon";
-export { minimalSkin, minimalSkinName } from "./minimal";
-export { officeSkin, officeSkinName } from "./office";
+export type { SkinName } from "./types.js";
+export { cartoonSkin, cartoonSkinName } from "./cartoon/index.js";
+export { minimalSkin, minimalSkinName } from "./minimal/index.js";
+export { officeSkin, officeSkinName } from "./office/index.js";

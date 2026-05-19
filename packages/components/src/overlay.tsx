@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { Button, Heading } from "@heeh-ui/core";
 import { cn } from "@heeh-ui/utils";

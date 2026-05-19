@@ -192,6 +192,9 @@ importers:
       '@heeh-ui/forms':
         specifier: workspace:*
         version: link:../forms
+      '@heeh-ui/hooks':
+        specifier: workspace:*
+        version: link:../hooks
       '@heeh-ui/utils':
         specifier: workspace:*
         version: link:../utils

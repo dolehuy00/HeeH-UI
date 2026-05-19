@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import type { ThemeContextValue } from "./types";
+import type { ThemeContextValue } from "./types.js";
 
 export const ThemeContext = React.createContext<ThemeContextValue | null>(null);
 

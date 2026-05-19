@@ -18,15 +18,18 @@ export type FormFieldProps = React.HTMLAttributes<HTMLDivElement> & {
   invalid?: boolean;
 };
 
-export function FormField({ invalid, className, ...props }: FormFieldProps) {
-  return (
+export const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
+  ({ invalid, className, ...props }, ref) => (
     <div
+      ref={ref}
       data-invalid={invalid || undefined}
       className={cn("heeh-form-field", invalid && "heeh-form-field--invalid", className)}
       {...props}
     />
-  );
-}
+  )
+);
+
+FormField.displayName = "FormField";
 
 export type FormLabelProps = React.LabelHTMLAttributes<HTMLLabelElement>;
 
@@ -42,30 +45,22 @@ export type FormMessageProps = React.HTMLAttributes<HTMLParagraphElement> & {
   tone?: "default" | "danger" | "muted";
 };
 
-export function FormMessage({
-  tone = "muted",
-  className,
-  ...props
-}: FormMessageProps) {
-  return (
-    <p className={cn("heeh-form-message", `heeh-form-message--${tone}`, className)} {...props} />
-  );
-}
+export const FormMessage = React.forwardRef<HTMLParagraphElement, FormMessageProps>(
+  ({ tone = "muted", className, ...props }, ref) => (
+    <p ref={ref} className={cn("heeh-form-message", `heeh-form-message--${tone}`, className)} {...props} />
+  )
+);
+
+FormMessage.displayName = "FormMessage";
 
 export type FormSectionProps = React.HTMLAttributes<HTMLElement> & {
   title?: React.ReactNode;
   description?: React.ReactNode;
 };
 
-export function FormSection({
-  title,
-  description,
-  className,
-  children,
-  ...props
-}: FormSectionProps) {
-  return (
-    <section className={cn("heeh-form-section", className)} {...props}>
+export const FormSection = React.forwardRef<HTMLElement, FormSectionProps>(
+  ({ title, description, className, children, ...props }, ref) => (
+    <section ref={ref} className={cn("heeh-form-section", className)} {...props}>
       {title || description ? (
         <div className="heeh-form-section__header">
           {title ? <h3 className="heeh-form-section__title">{title}</h3> : null}
@@ -76,5 +71,7 @@ export function FormSection({
       ) : null}
       <div className="heeh-form-section__body">{children}</div>
     </section>
-  );
-}
+  )
+);
+
+FormSection.displayName = "FormSection";

@@ -10,7 +10,8 @@ import {
   SegmentedControlItem,
   Text
 } from "@heeh-ui/core";
-import { UIProvider, useTheme, type SkinName, type ThemeMode } from "@heeh-ui/theme";
+import type { SkinName, ThemeMode } from "@heeh-ui/theme";
+import { UIProvider, useTheme } from "@heeh-ui/theme/client";
 
 const skinNames: SkinName[] = ["office", "cartoon", "minimal"];
 const themeModes: ThemeMode[] = ["light", "dark", "system"];

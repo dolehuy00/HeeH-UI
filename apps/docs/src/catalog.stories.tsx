@@ -2,12 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import {
   Alert,
   EmptyState,
-  Pagination,
-  Popover,
   Progress,
-  Skeleton,
-  Tabs
+  Skeleton
 } from "@heeh-ui/components";
+import { Pagination, Popover, Tabs } from "@heeh-ui/components/client";
 import { Button, Card, Grid, Heading, Stack, Text } from "@heeh-ui/core";
 import { Avatar, Badge, MetricCard, Table, Tag } from "@heeh-ui/data-display";
 import { JsonViewer, PermissionGuard } from "@heeh-ui/patterns";

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Heading, Stack, Text } from "@heeh-ui/core";
+import { Heading, Text } from "@heeh-ui/core";
 import { cn } from "@heeh-ui/utils";
 
 export function Spinner({ className, ...props }: React.HTMLAttributes<HTMLSpanElement>) {
@@ -97,25 +97,6 @@ export function Alert({ tone = "info", title, className, children, ...props }: A
 
 export function Banner(props: AlertProps) {
   return <Alert {...props} className={cn("heeh-banner", props.className)} />;
-}
-
-export type NotificationProps = AlertProps & {
-  onClose?: () => void;
-};
-
-export function Notification({ onClose, children, ...props }: NotificationProps) {
-  return (
-    <Alert {...props}>
-      <Stack direction="row" gap="sm">
-        <span>{children}</span>
-        {onClose ? (
-          <Button variant="ghost" size="sm" onClick={onClose}>
-            Dismiss
-          </Button>
-        ) : null}
-      </Stack>
-    </Alert>
-  );
 }
 
 export type StatusBadgeProps = React.HTMLAttributes<HTMLSpanElement> & {

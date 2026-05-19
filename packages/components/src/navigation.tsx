@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { Button, Link } from "@heeh-ui/core";
 import { Input } from "@heeh-ui/forms";

@@ -3,18 +3,12 @@ import { cn } from "@heeh-ui/utils";
 
 export type SegmentedControlProps = React.HTMLAttributes<HTMLDivElement> & {
   label?: React.ReactNode;
+  labelId?: string;
 };
 
-export function SegmentedControl({
-  children,
-  className,
-  label,
-  ...props
-}: SegmentedControlProps) {
-  const labelId = React.useId();
-
-  return (
-    <div className={cn("heeh-segmented-control", className)} {...props}>
+export const SegmentedControl = React.forwardRef<HTMLDivElement, SegmentedControlProps>(
+  ({ children, className, label, labelId, ...props }, ref) => (
+    <div ref={ref} className={cn("heeh-segmented-control", className)} {...props}>
       {label ? (
         <span className="heeh-segmented-control__label" id={labelId}>
           {label}
@@ -23,13 +17,15 @@ export function SegmentedControl({
       <div
         className="heeh-segmented-control__items"
         role="radiogroup"
-        aria-labelledby={label ? labelId : undefined}
+        aria-labelledby={label && labelId ? labelId : undefined}
       >
         {children}
       </div>
     </div>
-  );
-}
+  )
+);
+
+SegmentedControl.displayName = "SegmentedControl";
 
 export type SegmentedControlItemProps = Omit<
   React.ButtonHTMLAttributes<HTMLButtonElement>,

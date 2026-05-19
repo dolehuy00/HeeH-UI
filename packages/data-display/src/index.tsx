@@ -43,13 +43,10 @@ export function Table<TData>({ columns, data, className, ...props }: TableProps<
 }
 
 export const DataTable = Table;
-export const VirtualTable = Table;
 
 export function List({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) {
   return <ul className={cn("heeh-list", className)} {...props} />;
 }
-
-export const VirtualList = List;
 
 export function DescriptionList({ className, ...props }: React.HTMLAttributes<HTMLDListElement>) {
   return <dl className={cn("heeh-description-list", className)} {...props} />;

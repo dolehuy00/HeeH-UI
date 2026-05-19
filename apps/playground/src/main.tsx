@@ -5,7 +5,8 @@ import "@heeh-ui/styles/css";
 import "./playground.css";
 import { Button, Heading, Stack, Text } from "@heeh-ui/core";
 import { Card } from "@heeh-ui/components";
-import { UIProvider, useTheme, type SkinName } from "@heeh-ui/theme";
+import type { SkinName } from "@heeh-ui/theme";
+import { UIProvider, useTheme } from "@heeh-ui/theme/client";
 
 const skins: SkinName[] = ["office", "cartoon", "minimal"];
 

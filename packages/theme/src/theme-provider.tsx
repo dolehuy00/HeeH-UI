@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { ThemeContext } from "./theme-context";
-import type { ResolvedTheme, SkinName, ThemeMode, ThemeProviderProps } from "./types";
+import { ThemeContext } from "./theme-context.js";
+import type { ResolvedTheme, SkinName, ThemeMode, ThemeProviderProps } from "./types.js";
 
 function resolveTheme(theme: ThemeMode): ResolvedTheme {
   if (theme !== "system") return theme;
